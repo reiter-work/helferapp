@@ -20,7 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('shoppinglist/{id}', function ($id) {
     try {
-        return App\ShoppingList::getListById($id);
+        return App\Shoppinglist::getListById($id);
     } catch (Error $e) {
         return $e->getMessage();
     }
