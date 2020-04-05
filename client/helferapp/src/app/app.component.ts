@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'bs-root',
-  templateUrl: './app.component.html',
+  template: '<bs-shoppinglist></bs-shoppinglist>',
   styles: []
 })
 export class AppComponent {
