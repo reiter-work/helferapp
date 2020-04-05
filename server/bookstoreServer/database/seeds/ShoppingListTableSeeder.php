@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 
@@ -17,7 +18,8 @@ class ShoppingListTableSeeder extends Seeder
         for($i = 0; $i < 5; $i++){
 
             DB::table('shoppinglist')->insert([
-                'date' => new Date(),
+                'title' => Str::random(8),
+                'dueDate' => Carbon::now()->toDateTimeString(),
             ]);
         }
     }
