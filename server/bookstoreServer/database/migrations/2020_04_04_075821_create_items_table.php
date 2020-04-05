@@ -23,6 +23,7 @@ class CreateItemsTable extends Migration
             $table->integer('price');
             $table->integer('price_max')->nullable();
             $table->integer('price_payed')->nullable();
+            $table->integer('amount');
 
 
         });
