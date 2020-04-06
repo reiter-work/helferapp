@@ -14,6 +14,7 @@ class ApiAuthController extends Controller {
         $this->user = new User;
 }
     public function login (Request $request){
+
         $credentials = $request->only('email', 'password');
         $jwt = '';
 
@@ -38,12 +39,12 @@ class ApiAuthController extends Controller {
         return response()->json(['result' => $user]);
     }
 
-    /*get current authenticated user - JWT must be set in HTTP header*/​
+
     public function getCurrentAuthenticatedUser()
     {
         $user = JWTAuth::user();
         return response()->json(['result' => $user]);
-   }​
+   }
 
     public function logout()
     {

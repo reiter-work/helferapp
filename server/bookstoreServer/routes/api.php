@@ -23,6 +23,7 @@ Route::group(['middleware' => ['api', 'cors']], function () {
     Route::post('auth/login', 'Auth\ApiAuthController@login');
 });
 
+
 Route::get('shoppinglist/{id}', function ($id) {
     try {
         return App\Shoppinglist::getListById($id);
