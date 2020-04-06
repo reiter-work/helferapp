@@ -1,54 +1,64 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
+
+use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
-use Tymon\JWTAuth\JWTAuth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 
+class ApiAuthController extends Controller
+{
 
-class ApiAuthController extends Controller {
-
-    public function __construct() {
+    public function __construct()
+    {
         $this->user = new User;
-}
-    public function login (Request $request){
+    }
 
-        $credentials = $request->only('email', 'password');
+    //einfach login methode
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password'); //Bekommt man Array mit jeweiligen Werten
         $jwt = '';
-
         try {
-            if (! $jwt = JWTAuth::attempt($credentials)) {
-                return response()->json(['response' => 'error', 'message' => 'invalid_credentials',
-            ], 401);
-    }
-    }
-    catch (JWTAuthException $e) {
-            return response()->json(['response' => 'error', 'message' => 'failed_to_create_token',
-                ], 500);
+            if (!$jwt = JWTAuth::attempt($credentials)) {
+                return response()->json([
+                    'response' => 'error',
+                    'message' => 'invalid_credentials',
+                ], 401);
+            }
+        } catch (JWTAuthException $e) {
+            return response()->json([
+                'response' => 'error',
+                'message' => 'failed_to_create_token',
+            ], 500);
+        }
+        return response()->json([
+            'response' => 'success',
+            'result' => ['token' => $jwt]
+        ]);
     }
 
-    return response()->json(['response' => 'success', 'result' => ['token' => $jwt]
-    ]);
-}
-    /**    * authenticates user with token sent as parameter (GET / POST)    */
-
-    public function getAuthUser(Request $request){
+    public function getAuthUser(Request $request)
+    {
         $user = JWTAuth::toUser($request->token);
-        return response()->json(['result' => $user]);
+        return \response()->json(['result' => $user]);
     }
-
 
     public function getCurrentAuthenticatedUser()
     {
         $user = JWTAuth::user();
         return response()->json(['result' => $user]);
-   }
+    }
 
     public function logout()
     {
         JWTAuth::invalidate();
-        return response(['status' => 'success', 'msg' => 'Logged out Successfully.'], 200);
+        return response([
+            'status' => 'success',
+            'message' => 'Logged out successfully'
+        ], 200);
     }
 }

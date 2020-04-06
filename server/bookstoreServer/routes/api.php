@@ -2,6 +2,7 @@
 
 use App\ShoppingList;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 /* auth */
 Route::group(['middleware' => ['api', 'cors']], function () {
     Route::post('auth/login', 'Auth\ApiAuthController@login');
+});
+
+// methods which need authenticatoion - JWT Token
+Route::group(['middleware' => ['api', 'cors', 'auth.jwt']], function(){
+    Route::post('auth/logout', 'Auth\ApiAuthController@logout');
+
 });
 
 
