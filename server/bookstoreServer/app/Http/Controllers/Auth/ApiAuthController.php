@@ -3,21 +3,19 @@
 namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests;
-use JWTAuthException;
 use App\User;
 use Tymon\JWTAuth\JWTAuth;
 
 
-class ApiAuthController​extends​Controller {
+
+class ApiAuthController extends Controller {
 
     public function __construct() {
         $this->user = new User;
 }
-    public function login(Request $request){
-
+    public function login (Request $request){
         $credentials = $request->only('email', 'password');
-    $jwt = '';
+        $jwt = '';
 
         try {
             if (! $jwt = JWTAuth::attempt($credentials)) {

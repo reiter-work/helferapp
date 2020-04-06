@@ -17,7 +17,7 @@ class ShoppingListTableSeeder extends Seeder
         //
         for($i = 0; $i < 5; $i++){
 
-            DB::table('shoppinglist')->insert([
+            DB::table('shoppinglists')->insert([
                 'title' => Str::random(8),
                 'dueDate' => Carbon::now()->toDateTimeString(),
             ]);

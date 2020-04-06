@@ -17,7 +17,7 @@ class ItemTableSeeder extends Seeder
 
         for($i = 0; $i < 25; $i++){
 
-            $shoppingList = DB::table('shoppinglist')->orderByRaw("RAND()")->first();
+            $shoppingList = DB::table('shoppinglists')->orderByRaw("RAND()")->first();
 
             DB::table('items')->insert([
                 'title' => Str::random(8),
