@@ -33,6 +33,7 @@ Route::group(['middleware' => ['api', 'cors', 'auth.jwt']], function () {
     /**ShoppingListRouts**/
 
     Route::get('shoppinglist/{id}', 'ShoppingListController@getListById');
+    Route::get('shoppinglist/user/{uid}', 'ShoppingListController@getShoppinglistByUser');
     Route::post('shoppinglist', 'ShoppingListController@createList');
     Route::put('shoppinglist/{id}', 'ShoppingListController@updateList');
 

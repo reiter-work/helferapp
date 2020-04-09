@@ -19,6 +19,24 @@ class ShoppingListController extends Controller
         return json_encode([ Shoppinglist::find($id)]);
     }
 
+    public static function getShoppinglistByUser($uid){
+        try{
+            return response()->json([
+                'shoppinglist' => Shoppinglist::find($uid),
+            ]);
+        }
+        catch (Error $e){
+            return response()->json([
+                'response' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+
+
+
+
+    }
+
     public static function createList(Request $req) {
 
         try{

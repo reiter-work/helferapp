@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import {AuthService} from "./servives/auth.service";
 import {HttpClientModule} from "@angular/common/http";
 import { ShoppinglistDetailComponent } from './components/shoppinglist-detail/shoppinglist-detail.component';
+import {ShoppinglistService} from "./servives/shoppinglist.service";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { ShoppinglistDetailComponent } from './components/shoppinglist-detail/sh
     MatListModule,
     HttpClientModule
   ],
-  providers: [AuthService],
+  providers: [ShoppinglistService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
