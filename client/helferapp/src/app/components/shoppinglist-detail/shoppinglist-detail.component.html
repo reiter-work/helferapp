@@ -1,1 +1,12 @@
-<p>shoppinglist-detail works!</p>
+<div>
+  <div class="ui grid" *ngIf="shoppinglist">
+    <div class="twelve wide column">
+      <h1 class="ui header">{{ shoppinglist.title }}</h1>
+      <div class="ui divider"></div>
+    </div>
+
+    <button (click)="showShoppinglist()" class="ui red button">
+      Zurück zur Übersicht
+    </button>
+  </div>
+</div>

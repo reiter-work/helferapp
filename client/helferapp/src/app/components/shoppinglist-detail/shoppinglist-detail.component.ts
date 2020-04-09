@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Shoppinglist} from "../../shared/shoppinglist";
 
 @Component({
   selector: 'bs-shoppinglist-detail',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShoppinglistDetailComponent implements OnInit {
 
+  @Input()  shoppinglist: Shoppinglist;
+  @Output() showListEvent = new EventEmitter<any>();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  showShoppinglist(){
+    this.showListEvent.emit();
   }
 
 }

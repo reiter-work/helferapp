@@ -5,6 +5,11 @@
   <bs-greeting></bs-greeting>
   <bs-login></bs-login>
 
-  <bs-shopping-list *ngIf="isLoggedIn()"></bs-shopping-list>
+  <div *ngIf="isLoggedIn()">
+    <bs-shopping-list *ngIf="listOn" (showDetailsEvent)="showDetail($event)"></bs-shopping-list>
+    <bs-shoppinglist-detail *ngIf="detailOn" [shoppinglist]="shoppinglist" (showListEvent)="showList()"></bs-shoppinglist-detail>
+  </div >
+
+
 
 </div>

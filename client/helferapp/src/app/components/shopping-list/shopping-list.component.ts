@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Shoppinglist, ShoppingItem} from "../../shared/shoppinglist";
 
 @Component({
@@ -12,6 +12,7 @@ export class ShoppingListComponent implements OnInit {
 
   constructor() { }
 
+  @Output() showDetailsEvent = new EventEmitter<Shoppinglist>();
 
   ngOnInit(): void {
 
@@ -57,6 +58,11 @@ export class ShoppingListComponent implements OnInit {
 
     ]
 
+  }
+
+  showDetails(shoppinglist: Shoppinglist){
+    console.log("Details!");
+    this.showDetailsEvent.emit(shoppinglist);
   }
 
 }

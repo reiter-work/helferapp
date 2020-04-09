@@ -1,5 +1,9 @@
 <mat-list *ngFor="let shoppinglist of shoppinglists">
 
-<mat-list-item>{{shoppinglist.title}}</mat-list-item>
+<mat-list-item>
+
+  <a class="bs-shopping-list" (click)="showDetails(shoppinglist)">{{shoppinglist.title}}</a>
+
+</mat-list-item>
 
 </mat-list>
