@@ -26,32 +26,19 @@ Route::group(['middleware' => ['api', 'cors']], function () {
 });
 
 // methods which need authenticatoion - JWT Token
-Route::group(['middleware' => ['api', 'cors', 'auth.jwt']], function(){
+Route::group(['middleware' => ['api', 'cors', 'auth.jwt']], function () {
+
     Route::post('auth/logout', 'Auth\ApiAuthController@logout');
 
+    /**ShoppingListRouts**/
+
+    Route::get('shoppinglist/{id}', 'ShoppingListController@getListById');
+    Route::post('shoppinglist', 'ShoppingListController@createList');
+    Route::put('shoppinglist/{id}', 'ShoppingListController@updateList');
+
 });
 
 
-Route::get('shoppinglist/{id}', function ($id) {
-    try {
-        return App\Shoppinglist::getListById($id);
-    } catch (Error $e) {
-        return $e->getMessage();
-    }
-});
 
-Route::post('shoppinglist', function ($id) {
-    try {
-        return App\ShoppingList::createList();
-    } catch (Error $e) {
-        return $e->getMessage();
-    }
-});
 
-Route::put('shoppinglist/{id}', function ($id) {
-    try {
-        return App\ShoppingList::updateList($id);
-    } catch (Error $e) {
-        return $e->getMessage();
-    }
-});
+

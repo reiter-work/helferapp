@@ -19,6 +19,7 @@ class CreateShoppinglistsTable extends Migration
         $table->date('dueDate');
         $table->timestamps();
         //TODO: setup Users and bills and Feedback/Comments
+
     });
     }
 
