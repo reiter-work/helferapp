@@ -28,10 +28,15 @@ class ShoppingListController extends Controller
             $list->save();
         }
         catch (Error $e){
-            return "Error: " . $e->getMessage();
+            return response()->json([
+                'response' => 'error',
+                'message' => $e->getMessage()
+            ]);
         }
 
-        return "Saved";
+        return response()->json([
+            'response' => 'success'
+        ]);
 
     }
 

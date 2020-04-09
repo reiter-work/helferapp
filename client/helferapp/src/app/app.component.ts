@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'bs-root',
-  template: '<bs-login></bs-login>',
+  template: '<bs-home></bs-home>',
   styles: []
 })
 export class AppComponent {
