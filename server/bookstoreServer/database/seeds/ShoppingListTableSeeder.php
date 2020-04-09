@@ -20,6 +20,7 @@ class ShoppingListTableSeeder extends Seeder
             DB::table('shoppinglists')->insert([
                 'title' => Str::random(8),
                 'dueDate' => Carbon::now()->toDateTimeString(),
+                'user_id' => 1,
             ]);
         }
     }

@@ -17,13 +17,14 @@ class CreateItemsTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
 
-            $table->bigInteger('shoppingListId')->references('id')->on('shoppinglist');
+            $table->bigInteger('shoppinglist_id')->references('id')->on('shoppinglist');
 
             $table->string('title');
             $table->integer('price');
             $table->integer('price_max')->nullable();
             $table->integer('price_payed')->nullable();
             $table->integer('amount')->default(1);
+            $table->boolean('isDone')->default(false);
 
 
         });

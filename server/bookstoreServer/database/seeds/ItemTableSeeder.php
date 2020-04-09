@@ -22,7 +22,7 @@ class ItemTableSeeder extends Seeder
             DB::table('items')->insert([
                 'title' => Str::random(8),
                 'price' => rand(1, 29),
-                'shoppinglistId' => $shoppingList->id,
+                'shoppinglist_id' => $shoppingList->id,
              ]);
         }
 

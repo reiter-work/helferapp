@@ -15,10 +15,11 @@ class CreateShoppinglistsTable extends Migration
     {
         Schema::create('shoppinglists', function (Blueprint $table) {
         $table->bigIncrements('id');
+        $table->integer('user_id')->unsigned()->index();
         $table->string('title');
         $table->date('dueDate');
         $table->timestamps();
-        //TODO: setup Users and bills and Feedback/Comments
+        //TODO: bills and Feedback/Comments
 
     });
     }
