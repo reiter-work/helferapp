@@ -40,9 +40,14 @@ class User extends Authenticatable implements JWTSubject
     ];
 
 
-    public function shoppinglists()
+    public function shoppinglist()
     {
         return $this->hasMany(Shoppinglist::class);
+    }
+
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
     }
 
     /*JWT AUTH*/
