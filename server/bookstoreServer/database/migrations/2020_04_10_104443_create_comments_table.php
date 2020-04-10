@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateItemsTable extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,24 @@ class CreateItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
+            $table->text('comment');
+            $table->bigInteger('user_id')->unsigned()->index();
             $table->bigInteger('shoppinglist_id')->unsigned()->index();
-            $table->string('title');
-            $table->integer('price');
-            $table->integer('price_max')->nullable();
-            $table->integer('price_payed')->nullable();
-            $table->integer('amount')->default(1);
-            $table->boolean('isDone')->default(false);
+            $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
 
             $table->foreign('shoppinglist_id')
                 ->references('id')
                 ->on('shoppinglists')
                 ->onDelete('cascade');
-
         });
+
     }
 
     /**
@@ -39,6 +40,6 @@ class CreateItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('comments');
     }
 }

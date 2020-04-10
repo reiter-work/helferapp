@@ -14,7 +14,7 @@ class Shoppinglist extends Model
         'dueDate',
     ];
 
-    public function items() : HasMany
+    public function item() : HasMany
     {
         return $this->hasMany(Item::class);
     }

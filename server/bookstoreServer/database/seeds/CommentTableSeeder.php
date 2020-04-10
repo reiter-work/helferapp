@@ -1,10 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
-class ItemTableSeeder extends Seeder
+class CommentTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,23 +11,17 @@ class ItemTableSeeder extends Seeder
      */
     public function run()
     {
-
         $faker = Faker\Factory::create();
 
-        for($i = 0; $i < 25; $i++){
+        for($i = 0; $i < 15; $i++){
 
             $shoppingList = DB::table('shoppinglists')->orderByRaw("RAND()")->first();
 
-            DB::table('items')->insert([
-                'title' => $faker->word,
-                'price' => rand(1, 29),
+            DB::table('comments')->insert([
+                'comment' => $faker->sentence,
                 'shoppinglist_id' => $shoppingList->id,
-                'isDone' => $faker->boolean,
-             ]);
+                'user_id' => rand(1,2),
+            ]);
         }
-
-
-
-
     }
 }

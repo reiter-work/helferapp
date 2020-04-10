@@ -14,13 +14,15 @@ class ShoppingListTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+
+        $faker = Faker\Factory::create();
+
         for($i = 0; $i < 5; $i++){
 
             DB::table('shoppinglists')->insert([
-                'title' => Str::random(8),
-                'dueDate' => Carbon::now()->toDateTimeString(),
-                'user_id' => 1,
+                'title' => $faker->word,
+                'dueDate' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+2 months'),
+                'user_id' => rand(1,2),
             ]);
         }
     }

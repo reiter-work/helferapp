@@ -14,7 +14,7 @@ class Item extends Model
         'price_payed',
     ];
 
-    public function item() : BelongsTo
+    public function shoppinglist() : BelongsTo
     {
         return $this->belongsTo(Shoppinglist::class);
     }
