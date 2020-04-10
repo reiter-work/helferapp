@@ -22,7 +22,7 @@ class ItemTableSeeder extends Seeder
 
             DB::table('items')->insert([
                 'title' => $faker->word,
-                'price' => rand(1, 29),
+                'price_max' => rand(1, 29),
                 'shoppinglist_id' => $shoppingList->id,
                 'isDone' => $faker->boolean,
              ]);

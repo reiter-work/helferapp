@@ -12,6 +12,7 @@ class Shoppinglist extends Model
     protected $fillable = [
         'title',
         'dueDate',
+        'user_id',
     ];
 
     public function item() : HasMany

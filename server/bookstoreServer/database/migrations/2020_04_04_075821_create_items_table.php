@@ -18,7 +18,6 @@ class CreateItemsTable extends Migration
             $table->timestamps();
             $table->bigInteger('shoppinglist_id')->unsigned()->index();
             $table->string('title');
-            $table->integer('price');
             $table->integer('price_max')->nullable();
             $table->integer('price_payed')->nullable();
             $table->integer('amount')->default(1);
