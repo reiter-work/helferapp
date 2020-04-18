@@ -10,6 +10,7 @@ export class ShoppinglistService {
 
   private api = 'http://app.s1710456027.student.kwmhgb.at/api';
 
+
   constructor(private http: HttpClient) {
   }
 
@@ -21,5 +22,11 @@ export class ShoppinglistService {
 
   private errorHandler(error: Error | any): Observable<any>{
     return throwError(error);
+  }
+
+  getShoppinglists() {
+    console.log('Called API');
+    return this.http.get(`${this.api}/shoppinglist/user/`)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 }
