@@ -11,9 +11,10 @@ import { HomeComponent } from './components/home/home.component';
 import { GreetingComponent } from './components/greeting/greeting.component';
 import { LoginComponent } from './components/login/login.component';
 import {AuthService} from "./servives/auth.service";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { ShoppinglistDetailComponent } from './components/shoppinglist-detail/shoppinglist-detail.component';
 import {ShoppinglistService} from "./servives/shoppinglist.service";
+import {JwtInterceptorService} from "./shared/jwt-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -30,9 +31,19 @@ import {ShoppinglistService} from "./servives/shoppinglist.service";
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MatListModule,
-    HttpClientModule
+    HttpClientModule,
+
   ],
-  providers: [ShoppinglistService, AuthService],
+  providers: [ShoppinglistService, AuthService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptorService,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
