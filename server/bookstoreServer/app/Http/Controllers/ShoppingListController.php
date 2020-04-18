@@ -44,15 +44,7 @@ class ShoppingListController extends Controller
         try {
 
             $shoppinglists = Shoppinglist::where('user_id', $this->getUID($req))->get();
-
-                foreach ($shoppinglists as $list){
-                    $list->item;
-                    $list->comment;
-                }
-
-                return response()->json([
-                    'shoppinglists' => $shoppinglists
-            ], 200);
+            return $shoppinglists;
 
         } catch (Error $e) {
             return response()->json([

@@ -39,11 +39,7 @@ export class AuthService {
   }
 
   public setLocalStorage(token: string) {
-    console.log("Storing token");
-    console.log(token);
     const decodedToken = decode(token);
-    console.log(decodedToken);
-    console.log(decodedToken.user.id);
     localStorage.setItem('token', token);
     localStorage.setItem('userId', decodedToken.user.id);
   }

@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError, retry} from 'rxjs/operators';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 
 export class ShoppinglistService {
 
@@ -14,19 +14,12 @@ export class ShoppinglistService {
   constructor(private http: HttpClient) {
   }
 
-  getShoppinglistByUser(userId:number): Observable<Array<Shoppinglist>>{
-    return this.http.get(`${this.api}/shoppinglist/user/${userId}`)
+  getShoppinglists() {
+    return this.http.get(`${this.api}/shoppinglist/user`)
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
-
 
   private errorHandler(error: Error | any): Observable<any>{
     return throwError(error);
-  }
-
-  getShoppinglists() {
-    console.log('Called API');
-    return this.http.get(`${this.api}/shoppinglist/user/`)
-      .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 }

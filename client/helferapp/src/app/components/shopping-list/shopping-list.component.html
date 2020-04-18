@@ -1,9 +1,6 @@
-<mat-list *ngFor="let shoppinglist of shoppinglists">
-
-<mat-list-item>
-
-  <a class="bs-shopping-list" (click)="showDetails(shoppinglist)">{{shoppinglist.title}}</a>
-
-</mat-list-item>
-
-</mat-list>
+<div class="ui middle aligned selection divided list">
+  <a class="bs-book-list-item item"
+     *ngFor="let shoppinglist of shoppinglists"
+     [href]="shoppinglist.title" >
+  </a>
+</div>

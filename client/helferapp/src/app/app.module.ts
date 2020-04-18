@@ -15,6 +15,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { ShoppinglistDetailComponent } from './components/shoppinglist-detail/shoppinglist-detail.component';
 import {ShoppinglistService} from "./servives/shoppinglist.service";
 import {JwtInterceptorService} from "./shared/jwt-interceptor.service";
+import {TokenInterceptorService} from "./shared/token-interceptor.service";
 
 @NgModule({
   declarations: [

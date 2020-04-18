@@ -15,8 +15,13 @@ export class ShoppingListComponent implements OnInit {
 
   @Output() showDetailsEvent = new EventEmitter<Shoppinglist>();
 
-  ngOnInit(): void {
-    console.log(this.ss.getShoppinglists());
+  ngOnInit() {
+    this.ss.getShoppinglists().subscribe(
+      res => {
+        this.shoppinglists = res;
+        console.log(this.shoppinglists)
+      });
+    //
   }
 
   showDetails(shoppinglist: Shoppinglist){
