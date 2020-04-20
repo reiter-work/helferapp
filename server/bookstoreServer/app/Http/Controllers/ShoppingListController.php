@@ -43,7 +43,7 @@ class ShoppingListController extends Controller
     {
         try {
 
-            $shoppinglists = Shoppinglist::where('user_id', $this->getUID($req))->get();
+            $shoppinglists = Shoppinglist::where('user_id', $this->getUID($req))->with('item')->get();
             return $shoppinglists;
 
         } catch (Error $e) {

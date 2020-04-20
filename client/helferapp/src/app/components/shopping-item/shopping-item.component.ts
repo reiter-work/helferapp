@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ShoppingItem} from "../../shared/shopping-item";
 
 @Component({
   selector: 'bs-shopping-item',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class ShoppingItemComponent implements OnInit {
+
+  @Input() public item: ShoppingItem;
 
   constructor() { }
 

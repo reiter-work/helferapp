@@ -1,1 +1,14 @@
-<p>shopping-item works!</p>
+<div>
+  <mat-list-option>
+    <input type="text" id="name" value="{{item.title}}">
+  </mat-list-option>
+  <p matLine>
+    <label for="amount">Anzahl
+      <input type="text" id="amount" value="{{item.amount}}">
+    </label>
+    <label for="price_max">Preis maximal
+      <input type="number" id="price_max" value="{{item.price_max}}">
+    </label>
+  </p>
+</div>
+
