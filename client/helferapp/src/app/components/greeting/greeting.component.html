@@ -1,10 +1,10 @@
 <div class="row greeting">
 
-  <div class="col-12" *ngIf="isloggedin">
-    <h1>Hallo, {{username}}!</h1>
+  <div class="col-12" *ngIf="isLoggedIn()">
+    <h1>Hallo, {{getUsername()}}!</h1>
   </div>
 
-  <div class="col-12" *ngIf="!isloggedin">
+  <div class="col-12" *ngIf="!isLoggedIn()">
     <h1>Herzlich willkommen bei der Helferapp!</h1>
     <p>Bitte melden Sie sich an!</p>
   </div>

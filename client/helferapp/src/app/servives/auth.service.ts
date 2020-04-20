@@ -63,4 +63,7 @@ export class AuthService {
     return !this.isLoggedIn();
   }
 
+  public isHelper(){
+    return localStorage.getItem("isHelper");
+  }
 }

@@ -11,13 +11,17 @@ import {LoginComponent} from "../login/login.component";
 
 export class GreetingComponent implements OnInit {
 
-  @Input() public isloggedin:boolean;
-  public username:string;
-
   constructor() { }
 
   ngOnInit(): void {
-    this.username = localStorage.username;
+
   }
 
+  getUsername(){
+    return localStorage.getItem("username");
+  }
+
+  isLoggedIn(){
+    return !!localStorage.getItem("token")
+  }
 }

@@ -1,6 +1,7 @@
-import {Component, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../servives/auth.service";
+import {Shoppinglist} from "../../shared/shoppinglist";
 
 
 
@@ -17,9 +18,11 @@ interface Response {
   styles: []
 })
 
+
+
 export class LoginComponent implements OnInit {
 
-
+  @Output() loginEvent = new EventEmitter<String>();
 
   loginForm:FormGroup;
 
@@ -41,6 +44,7 @@ export class LoginComponent implements OnInit {
         const resObj = res as Response;
         if(resObj.response === "success"){
           this.authService.setLocalStorage(resObj.result.token);
+          this.loginEvent.emit(val.username);
         }
       })
     }

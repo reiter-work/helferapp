@@ -8,11 +8,15 @@ import {
 } from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Observable} from 'rxjs';
-import {tap​} from 'rxjs/operators';
+import {AuthService} from "../servives/auth.service";
+import {tap} from "rxjs/operators";
 
 @Injectable()
 
 export class JwtInterceptorService implements HttpInterceptor {
+
+  constructor(private  as:AuthService){}
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(tap((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
@@ -29,6 +33,7 @@ export class JwtInterceptorService implements HttpInterceptor {
             // http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-example-tutorial​
             console.log("error");
             alert("Invalid login");
+            this.as.logout();
           }
 
         }

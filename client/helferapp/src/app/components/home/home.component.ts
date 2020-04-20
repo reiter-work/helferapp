@@ -34,11 +34,17 @@ export class HomeComponent implements OnInit {
     this.detailOn = true;
   }
 
+  isHelper(){
+    return !!localStorage.getItem("isHelper");
+  }
+
   isLoggedIn(){
     return !!localStorage.getItem("token");
   }
 
   logout(){
+    this.listOn = true;
+    this.detailOn = false;
     this.as.logout();
   }
 
