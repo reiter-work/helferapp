@@ -1,14 +1,40 @@
-<div class="home">
+<div class="home mat-app-background">
 
-  <h1>HomeScreen</h1>
+  <mat-toolbar color="primary">
 
-  <bs-greeting></bs-greeting>
-  <bs-login></bs-login>
+      <span>
+          <h1 class="mat-h1">Helferapp</h1>
+      </span>
 
-  <div *ngIf="isLoggedIn()">
-    <bs-shopping-list *ngIf="listOn" (showDetailsEvent)="showDetail($event)"></bs-shopping-list>
-    <bs-shoppinglist-detail *ngIf="detailOn" [shoppinglist]="shoppinglist" (showListEvent)="showList()"></bs-shoppinglist-detail>
-  </div >
+      <span class="mat-toolbar-filler"></span>
+
+      <span *ngIf="isLoggedIn()">
+          <span class="mat-icon-button" (click)="logout()">Logout
+            <mat-icon>logout</mat-icon>
+          </span>
+      </span>
+
+  </mat-toolbar>
+
+  <div class="container">
+
+    <bs-greeting [isloggedin]="isLoggedIn()"></bs-greeting>
+
+    <bs-login></bs-login>
+
+    <div class="row" *ngIf="isLoggedIn()">
+
+      <div class="col-12">
+        <bs-shopping-list *ngIf="listOn" (showDetailsEvent)="showDetail($event)"></bs-shopping-list>
+        <bs-shoppinglist-detail *ngIf="detailOn" [shoppinglist]="shoppinglist" (showListEvent)="showList()"></bs-shoppinglist-detail>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
 
 
 

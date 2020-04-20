@@ -42,12 +42,16 @@ export class AuthService {
     const decodedToken = decode(token);
     localStorage.setItem('token', token);
     localStorage.setItem('userId', decodedToken.user.id);
+    localStorage.setItem('isHelper', decodedToken.user.isHelper);
+    localStorage.setItem('username', decodedToken.user.username);
   }
 
   logout() {
     this.http.post(`${this.api}/logout`, {});
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
+    localStorage.removeItem("isHelper");
+    localStorage.removeItem("username");
     console.log("logged out");
   }
 

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../servives/auth.service";
+
+
 
 interface Response {
   response: string;
@@ -14,7 +16,10 @@ interface Response {
   templateUrl: './login.component.html',
   styles: []
 })
+
 export class LoginComponent implements OnInit {
+
+
 
   loginForm:FormGroup;
 
@@ -25,6 +30,8 @@ export class LoginComponent implements OnInit {
       username: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+
+
   }
 
   login(){

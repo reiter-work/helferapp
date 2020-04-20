@@ -1,12 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {LoginComponent} from "../login/login.component";
 import {Shoppinglist} from "../../shared/shoppinglist";
+import {AuthService} from "../../servives/auth.service";
+
 
 @Component({
   selector: 'bs-home',
   templateUrl: './home.component.html',
   styles: []
 })
+
 export class HomeComponent implements OnInit {
 
   listOn = true;
@@ -14,7 +17,8 @@ export class HomeComponent implements OnInit {
 
   shoppinglist: Shoppinglist;
 
-  constructor() { }
+
+  constructor(private as: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -32,8 +36,10 @@ export class HomeComponent implements OnInit {
 
   isLoggedIn(){
     return !!localStorage.getItem("token");
+  }
 
-
+  logout(){
+    this.as.logout();
   }
 
 }

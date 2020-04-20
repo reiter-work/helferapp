@@ -1,2 +1,14 @@
-<div>Hallo!</div>
-<!--TODO Impelment greeting-->
+<div class="row greeting">
+
+  <div class="col-12" *ngIf="isloggedin">
+    <h1>Hallo, {{username}}!</h1>
+  </div>
+
+  <div class="col-12" *ngIf="!isloggedin">
+    <h1>Herzlich willkommen bei der Helferapp!</h1>
+    <p>Bitte melden Sie sich an!</p>
+  </div>
+
+
+</div>
+

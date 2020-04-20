@@ -16,6 +16,11 @@ import { ShoppinglistDetailComponent } from './components/shoppinglist-detail/sh
 import {ShoppinglistService} from "./servives/shoppinglist.service";
 import {JwtInterceptorService} from "./shared/jwt-interceptor.service";
 import {TokenInterceptorService} from "./shared/token-interceptor.service";
+import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatCardModule} from "@angular/material/card";
+import {MatIconModule} from "@angular/material/icon";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 @NgModule({
   declarations: [
@@ -33,6 +38,11 @@ import {TokenInterceptorService} from "./shared/token-interceptor.service";
     ReactiveFormsModule,
     MatListModule,
     HttpClientModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
 
   ],
   providers: [ShoppinglistService, AuthService, {
