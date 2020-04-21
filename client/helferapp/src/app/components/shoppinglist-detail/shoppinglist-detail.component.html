@@ -11,8 +11,9 @@
   </mat-card-content>
 
   <mat-card-content *ngIf="!userIsHelper">
-    <mat-list *ngFor="let item of shoppinglist.item">
+    <mat-list *ngFor="let item of shoppinglist.item; let last = last">
       <bs-shopping-item [item]="item" (deleteItemEvent)="deleteItem($event)"></bs-shopping-item>
+      <mat-divider *ngIf="!last"></mat-divider>
     </mat-list>
   </mat-card-content>
 

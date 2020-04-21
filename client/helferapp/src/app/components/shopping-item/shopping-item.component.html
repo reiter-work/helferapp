@@ -5,9 +5,12 @@
       {{item.amount}}
       {{item.price_max}}
       <span class="mat-toolbar-filler"></span>
-      <mat-icon matListIcon>create</mat-icon>
 
-      <button mat-button (click)="openDialog()">
+      <button mat-button (click)="editItem()">
+        <mat-icon matListIcon >create</mat-icon>
+      </button>
+
+      <button mat-button (click)="deleteItem()">
         <mat-icon matListIcon >delete</mat-icon>
       </button>
 
@@ -24,6 +27,5 @@
 
     </p>
   </mat-list-option>
-
 </div>
 

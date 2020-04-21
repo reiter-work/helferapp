@@ -19,17 +19,22 @@ export class ShoppinglistService {
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 
-  updateShoppinglist(id){
-    return this.http.delete(`${this.api}/shoppinglist/{id}`)
+  updateShoppinglist(id:string){
+    return this.http.delete(`${this.api}/shoppinglist/${id}`)
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 
-  deleteItem(id){
+  deleteItem(id:string){
     console.log(id);
     return this.http.delete(`${this.api}/shoppinglist/deleteItem/${id}`)
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 
+  updateItem(id:number, item:ShoppingItem){
+    console.log("update");
+    return this.http.put(`${this.api}/shoppinglist/item/${id}`, item)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
 
   private errorHandler(error: Error | any): Observable<any>{
     return throwError(error);
