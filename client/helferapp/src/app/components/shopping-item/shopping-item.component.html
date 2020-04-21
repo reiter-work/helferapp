@@ -1,14 +1,29 @@
 <div>
-  <mat-list-option>
-    <input type="text" id="name" value="{{item.title}}">
+  <mat-list *ngIf="!userIsHelper">
+    <h3 matLine>{{item.title}}</h3>
+    <p matLine>
+      {{item.amount}}
+      {{item.price_max}}
+      <span class="mat-toolbar-filler"></span>
+      <mat-icon matListIcon>create</mat-icon>
+
+      <button mat-button (click)="openDialog()">
+        <mat-icon matListIcon >delete</mat-icon>
+      </button>
+
+    </p>
+  </mat-list>
+
+  <mat-list-option *ngIf="userIsHelper">
+
+    <h2 matLine>{{item.title}}</h2>
+    <p matLine>
+      <span>Anzahl: {{item.amount}}</span>
+      <span>maximal Preis: {{item.price_max}}</span>
+      <span>bezahlter Preis: {{item.price_payed}}</span>
+
+    </p>
   </mat-list-option>
-  <p matLine>
-    <label for="amount">Anzahl
-      <input type="text" id="amount" value="{{item.amount}}">
-    </label>
-    <label for="price_max">Preis maximal
-      <input type="number" id="price_max" value="{{item.price_max}}">
-    </label>
-  </p>
+
 </div>
 

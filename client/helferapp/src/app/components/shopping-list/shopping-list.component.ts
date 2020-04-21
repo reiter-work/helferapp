@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Shoppinglist, ShoppingItem} from "../../shared/shoppinglist";
 import {ShoppinglistService} from "../../servives/shoppinglist.service";
 

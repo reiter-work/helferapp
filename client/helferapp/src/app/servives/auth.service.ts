@@ -64,6 +64,6 @@ export class AuthService {
   }
 
   public isHelper(){
-    return localStorage.getItem("isHelper");
+    return localStorage.getItem("isHelper") == "1";
   }
 }

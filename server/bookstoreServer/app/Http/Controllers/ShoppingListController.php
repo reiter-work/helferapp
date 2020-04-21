@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Item;
 use App\Shoppinglist;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Error;
@@ -114,9 +115,72 @@ class ShoppingListController extends Controller
 
     }
 
-    public function updateList($id)
+    public function updateList(Request $req)
     {
+        DB::beginTransaction();
 
+        try {
+
+            $req = $this->parseReq($req);
+
+            $shoppinglist = Shoppinglist::find($req->id)->with('item', 'comment')->first();
+
+            $shoppinglist->update($req->all());
+
+            //updateItems
+            $items = [];
+
+            //get all current shopping items
+            foreach($shoppinglist->item as $item){
+                array_push($items, Item::find($item->id));
+            }
+
+            //sync with sent items
+
+            foreach ($req->item as $itemToSync){
+
+
+
+            }
+
+            //$shoppinglist->comment = $req->comment;
+//            TODO Comments
+
+
+            $shoppinglist->save();
+            DB::commit();
+
+            return response()->json(Shoppinglist::find($req->id), 201);
+
+
+        } catch (Error $e) {
+
+            DB::rollBack();
+            return response()->json([
+                'response' => 'Updating Shoppinglist failed',
+                'message' => $e->getMessage()
+            ],420);
+        }
+    }
+
+    public function deleteItemById($id){
+
+        try{
+
+            $item = Item::find($id);
+
+            if($item){
+                $item->delete();
+            }
+
+            return response()->json('deleted', 204);
+
+        }catch (Error $e) {
+            return response()->json([
+                'response' => 'Deleting Item failed',
+                'message' => $e->getMessage()
+            ], 420);
+        }
     }
 
     private function getUID($req) : int{

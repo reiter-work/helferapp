@@ -21,6 +21,9 @@ import {MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import { ConfirmationDialogComponent } from './components/shared/confirmation-dialog/confirmation-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -31,20 +34,26 @@ import {MatInputModule} from "@angular/material/input";
     GreetingComponent,
     LoginComponent,
     ShoppinglistDetailComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    MatListModule,
     HttpClientModule,
+    MatListModule,
     MatToolbarModule,
     MatCardModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-
+    MatDialogModule,
+    MatButtonModule,
   ],
+  entryComponents: [
+    ConfirmationDialogComponent
+  ],
+
   providers: [ShoppinglistService, AuthService, {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,

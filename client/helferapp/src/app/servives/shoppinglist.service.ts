@@ -19,7 +19,21 @@ export class ShoppinglistService {
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 
+  updateShoppinglist(id){
+    return this.http.delete(`${this.api}/shoppinglist/{id}`)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
+  deleteItem(id){
+    console.log(id);
+    return this.http.delete(`${this.api}/shoppinglist/deleteItem/${id}`)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
+
   private errorHandler(error: Error | any): Observable<any>{
     return throwError(error);
   }
+
+
 }

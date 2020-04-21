@@ -3,13 +3,17 @@
     <mat-card-title>{{ shoppinglist.title }}</mat-card-title>
     <mat-card-subtitle>{{ shoppinglist.dueDate }}</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content>
 
+  <mat-card-content *ngIf="userIsHelper">
     <mat-selection-list *ngFor="let item of shoppinglist.item">
-
       <bs-shopping-item [item]="item"></bs-shopping-item>
-
     </mat-selection-list>
+  </mat-card-content>
+
+  <mat-card-content *ngIf="!userIsHelper">
+    <mat-list *ngFor="let item of shoppinglist.item">
+      <bs-shopping-item [item]="item" (deleteItemEvent)="deleteItem($event)"></bs-shopping-item>
+    </mat-list>
   </mat-card-content>
 
   <mat-card-footer>

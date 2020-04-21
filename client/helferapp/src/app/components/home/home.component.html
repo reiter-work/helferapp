@@ -6,7 +6,7 @@
           <h1 class="mat-h1">Helferapp</h1>
       </span>
 
-      <span class="mat-toolbar-filler">{{isHelper()}}</span>
+      <span class="mat-toolbar-filler"></span>
 
       <span *ngIf="isLoggedIn()">
           <span class="mat-icon-button" (click)="logout()">Logout
@@ -25,7 +25,11 @@
     <div class="row" *ngIf="isLoggedIn()">
 
       <div class="col-12">
+
         <bs-shopping-list *ngIf="listOn" (showDetailsEvent)="showDetail($event)"></bs-shopping-list>
+
+
+
         <bs-shoppinglist-detail *ngIf="detailOn" [shoppinglist]="shoppinglist" (showListEvent)="showList()"></bs-shoppinglist-detail>
       </div>
 
