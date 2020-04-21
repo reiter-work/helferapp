@@ -183,6 +183,35 @@ class ShoppingListController extends Controller
         }
     }
 
+    public function updateItem(Request $req){
+
+        DB::beginTransaction();
+
+        try{
+
+            $req = $this->parseReq($req);
+
+            $item = Item::find($req->id);
+            $item->update($req->all());
+            $item->save();
+            DB::commit();
+
+            return response()->json($req->id, 202);
+
+
+        } catch (Error $e){
+
+            DB::rollBack();
+
+            return response()->json([
+                'response' => 'Updating Item failed',
+                'message' => $e->getMessage()
+            ], 420);
+
+        }
+
+    }
+
     private function getUID($req) : int{
 
         $token = $req->bearerToken();

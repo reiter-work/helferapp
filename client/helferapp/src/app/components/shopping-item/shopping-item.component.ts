@@ -19,7 +19,7 @@ export class ShoppingItemComponent implements OnInit {
   @Input() public item: ShoppingItem;
   @Output() deleteItemEvent = new EventEmitter<ShoppingItem>();
 
-  constructor(private as: AuthService, private ss: ShoppinglistService, private dialog: MatDialog ) {
+  constructor(private as: AuthService, public ss: ShoppinglistService, private dialog: MatDialog ) {
   }
 
   userIsHelper = this.as.isHelper();
@@ -53,7 +53,12 @@ export class ShoppingItemComponent implements OnInit {
     const dialogRef = this.dialog.open(InputDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(
-      data => this.ss.updateItem(data.id, data)
+      data => {
+        this.item.title = data.title;
+        this.item.amount = data.amount;
+        this.item.price_max = data.price_max;
+        this.ss.updateItem(this.item).subscribe();
+      }
     );
   }
 }

@@ -25,14 +25,15 @@ export class ShoppinglistService {
   }
 
   deleteItem(id:string){
-    console.log(id);
     return this.http.delete(`${this.api}/shoppinglist/deleteItem/${id}`)
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 
-  updateItem(id:number, item:ShoppingItem){
-    console.log("update");
-    return this.http.put(`${this.api}/shoppinglist/item/${id}`, item)
+  updateItem(item:ShoppingItem){
+    console.log("API IS CALLED");
+    console.log(this.http.put(`${this.api}/shoppinglist/item`, item)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler)));
+    return this.http.put(`${this.api}/shoppinglist/item`, item)
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 
