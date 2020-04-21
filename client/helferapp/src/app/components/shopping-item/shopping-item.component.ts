@@ -18,7 +18,8 @@ export class ShoppingItemComponent implements OnInit {
   @Input() public item: ShoppingItem;
   @Output() deleteItemEvent = new EventEmitter<ShoppingItem>();
 
-  constructor(private as:AuthService, private ss:ShoppinglistService, public dialog: MatDialog) { }
+  constructor(private as: AuthService, private ss: ShoppinglistService, public dialog: MatDialog) {
+  }
 
   userIsHelper = this.as.isHelper();
 
@@ -28,19 +29,13 @@ export class ShoppingItemComponent implements OnInit {
   openDialog(): void {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       width: '350px',
-      data: "Möchten Sie den Listeneintrag wirklich löschen?"
+      data: "Möchten Sie den Listeneintrag wirklich löschen?",
     });
-    dialogRef.afterClosed().subscribe(result => {
-      if(result) {
-        console.log('Yes clicked');
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleteItemEvent.emit(this.item);
       }
     });
   }
-
-
-  deleteItem(item:ShoppingItem){
-
-    this.deleteItemEvent.emit(item);
-  }
-
 }
