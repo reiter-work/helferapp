@@ -71,38 +71,35 @@ class ShoppingListController extends Controller
 
             ]);
 
-            $items = $req->item;
-
-            foreach($items as $item){
-
-                $newItem = Item::create([
-                           'shoppinglist_id' => $shoppinglist->id,
-                           'title' => $item['title'],
-                        ]);
-
-                if(isset($item['price_max'])) $newItem->price_max = $item['price_max'];
-                if(isset($item['amount'])) $newItem->price_max = $item['amount'];
-                if(isset($item['price_payed'])) $newItem->price_max = $item['price_payed'];
-            }
-
-            $comments = $req->comment;
-
-            foreach($comments as $comment){
-
-                Comment::create([
-                    'user_id' => 2,
-                    'shoppinglist_id' => $shoppinglist->id,
-                    'comment' => $comment['comment'],
-                ]);
-
-            }
+//            $items = $req->item;
+//
+//            foreach($items as $item){
+//
+//                $newItem = Item::create([
+//                           'shoppinglist_id' => $shoppinglist->id,
+//                           'title' => $item['title'],
+//                        ]);
+//
+//                if(isset($item['price_max'])) $newItem->price_max = $item['price_max'];
+//                if(isset($item['amount'])) $newItem->price_max = $item['amount'];
+//                if(isset($item['price_payed'])) $newItem->price_max = $item['price_payed'];
+//            }
+//
+//            $comments = $req->comment;
+//
+//            foreach($comments as $comment){
+//
+//                Comment::create([
+//                    'user_id' => 2,
+//                    'shoppinglist_id' => $shoppinglist->id,
+//                    'comment' => $comment['comment'],
+//                ]);
+//
+//            }
 
             DB::commit();
 
-            $shoppinglist->item;
-            $shoppinglist->comment;
-
-            return response()->json([$shoppinglist,], 201);
+            return response()->json([$shoppinglist], 201);
 
         } catch (Error $e) {
 

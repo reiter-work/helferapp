@@ -24,6 +24,11 @@ export class ShoppinglistService {
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 
+  createShoppinglist(data:any){
+    return this.http.post(`${this.api}/shoppinglist`, data)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
   deleteItem(id:string){
     return this.http.delete(`${this.api}/shoppinglist/deleteItem/${id}`)
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
