@@ -2,12 +2,13 @@ import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/c
 import {ShoppingItem, Shoppinglist} from "../../shared/shoppinglist";
 import {AuthService} from "../../servives/auth.service";
 import {ShoppinglistService} from "../../servives/shoppinglist.service";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {InputDialogComponent} from "../shared/input-dialog/input-dialog.component";
+import {ShoppingitemFactory} from "../../shared/shopping-item-factory";
 
-export interface ItemData {
-  title: string;
-  user_id:number;
-  dueDate:Date;
+
+export interface DialogData {
+  item: ShoppingItem,
 }
 
 @Component({
@@ -20,9 +21,10 @@ export class ShoppinglistDetailComponent implements OnInit {
   @Input()  shoppinglist: Shoppinglist;
   @Output() showListEvent = new EventEmitter<any>();
 
-  constructor(private as:AuthService, public ss:ShoppinglistService) { }
+  constructor(private as:AuthService, public ss:ShoppinglistService,  public dialog: MatDialog) { }
 
   userIsHelper = this.as.isHelper();
+  shoppingItem: ShoppingItem = ShoppingitemFactory.empty();
 
   ngOnInit(): void {
   }
@@ -36,19 +38,23 @@ export class ShoppinglistDetailComponent implements OnInit {
     this.shoppinglist.item = this.shoppinglist.item.filter(function(el) { return el.id != item.id; });
   }
 
-}
+  openDialog(): void {
+    const dialogRef = this.dialog.open(InputDialogComponent, {
+      data: {item: this.shoppingItem}
+    });
 
-@Component({
-  selector: 'add-item-dialog',
-  templateUrl: './add-item-dialog.html',
-})
-export class AddItemDialog {
+    dialogRef.afterClosed().subscribe(result => {
+      if(!!result.title || !!result.amount || !!result.price_max){
 
-  constructor(
-    public dialogRef: MatDialogRef<AddItemDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: ItemData) {}
+        console.log(result.amount);
 
-  onNoClick(): void {
-    this.dialogRef.close();
+        result.shoppinglist_id = this.shoppinglist.id;
+        this.shoppinglist.item.push(result);
+        this.ss.addItem(result).subscribe();
+      }
+
+    });
   }
+
+
 }

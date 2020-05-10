@@ -4,29 +4,29 @@
   </mat-card-header>
   <mat-card-content>
 
-    <mat-list>
+    <mat-action-list>
 
-      <mat-list-item *ngFor="let shoppinglist of shoppinglists">
-
-        <a class="bs-shopping-list" (click)="showDetails(shoppinglist)">{{shoppinglist.title}}</a>
-
+      <mat-list-item *ngFor="let shoppinglist of shoppinglists" (click)="showDetails(shoppinglist)">
+          <span matLine>{{shoppinglist.title}}</span>
+          <button mat-icon-button >
+            <mat-icon>create</mat-icon>
+          </button>
+          <button mat-icon-button>
+            <mat-icon>delete</mat-icon>
+          </button>
+          <p matLine>{{shoppinglist.dueDate}} ||| Anzahl: {{shoppinglist.item.length}}</p>
       </mat-list-item>
-
-      <mat-divider></mat-divider>
-
+    </mat-action-list>
+    <mat-list>
       <mat-list-item>
-
         <mat-form-field matLine>
           <mat-label>Neue Einkaufsliste erstellen</mat-label>
           <input matInput [(ngModel)]="title">
-
         </mat-form-field>
-        <a (click)="openDialog()">
-          <mat-icon color="accent">add</mat-icon>
-        </a>
-
+        <button mat-icon-button (click)="openDialog()">
+          <mat-icon>add</mat-icon>
+        </button>
       </mat-list-item>
-
     </mat-list>
   </mat-card-content>
 </mat-card>

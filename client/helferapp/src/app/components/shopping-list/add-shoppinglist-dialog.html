@@ -9,13 +9,6 @@
     <mat-label>Erledigungsdatum</mat-label>
     <input matInput required type="date" [(ngModel)]="data.dueDate">
   </mat-form-field>
-
-  <h2>Einkaufsgegenstände</h2>
-
-  <mat-form-field>
-    <mat-label>Titel</mat-label>
-    <input matInput [(ngModel)]="data.title" value="{{data.title}}">
-  </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Abbrechen</button>

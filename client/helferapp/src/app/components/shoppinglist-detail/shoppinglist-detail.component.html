@@ -11,10 +11,20 @@
   </mat-card-content>
 
   <mat-card-content *ngIf="!userIsHelper">
-    <mat-list *ngFor="let item of shoppinglist.item; let last = last">
+    <mat-list *ngFor="let item of shoppinglist.item">
       <bs-shopping-item [item]="item" (deleteItemEvent)="deleteItem($event)"></bs-shopping-item>
-      <mat-divider *ngIf="!last"></mat-divider>
+      <mat-divider></mat-divider>
     </mat-list>
+
+    <mat-list>
+      <mat-list-item>
+        <button mat-button (click)="openDialog()">
+          <mat-icon>add</mat-icon>
+           hinzufügen
+        </button>
+      </mat-list-item>
+    </mat-list>
+
   </mat-card-content>
 
   <mat-card-footer>

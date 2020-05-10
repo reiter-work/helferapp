@@ -24,7 +24,7 @@ export class ShoppinglistService {
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 
-  createShoppinglist(data:any){
+  createShoppinglist(data:any) : Observable<Shoppinglist>{
     return this.http.post(`${this.api}/shoppinglist`, data)
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
@@ -35,10 +35,12 @@ export class ShoppinglistService {
   }
 
   updateItem(item:ShoppingItem){
-    console.log("API IS CALLED");
-    console.log(this.http.put(`${this.api}/shoppinglist/item`, item)
-      .pipe(retry(3)).pipe(catchError(this.errorHandler)));
     return this.http.put(`${this.api}/shoppinglist/item`, item)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
+  addItem(item:ShoppingItem){
+    return this.http.post(`${this.api}/shoppinglist/item`, item)
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 

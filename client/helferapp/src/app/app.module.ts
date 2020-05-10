@@ -12,10 +12,7 @@ import {GreetingComponent} from './components/greeting/greeting.component';
 import {LoginComponent} from './components/login/login.component';
 import {AuthService} from "./servives/auth.service";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {
-  AddItemDialog,
-  ShoppinglistDetailComponent
-} from './components/shoppinglist-detail/shoppinglist-detail.component';
+import {ShoppinglistDetailComponent} from './components/shoppinglist-detail/shoppinglist-detail.component';
 import {ShoppinglistService} from "./servives/shoppinglist.service";
 import {JwtInterceptorService} from "./shared/jwt-interceptor.service";
 import {TokenInterceptorService} from "./shared/token-interceptor.service";
@@ -41,7 +38,7 @@ import { InputDialogComponent } from './components/shared/input-dialog/input-dia
     ConfirmationDialogComponent,
     InputDialogComponent,
     AddShoppinglistDialog,
-    AddItemDialog,
+
   ],
   imports: [
     BrowserModule,

@@ -1,28 +1,31 @@
-  <mat-list *ngIf="!userIsHelper">
-    <h3 matLine>{{item.title}}</h3>
-    <p matLine>
-      {{item.amount}}
-      {{item.price_max}}
-      <span class="mat-toolbar-filler"></span>
+<!--User List-->
 
-      <button mat-button (click)="editItem()">
-        <mat-icon matListIcon >create</mat-icon>
-      </button>
+<mat-list-item *ngIf="!userIsHelper">
 
-      <button mat-button (click)="deleteItem()">
-        <mat-icon matListIcon >delete</mat-icon>
-      </button>
+  <h2 matLine>{{item.title}}</h2>
+  <p matLine>
+    Anzahl: {{item.amount}} ||| max. Preis: € {{item.price_max}}
+  </p>
+  <p matLine>
+    <button mat-icon-button (click)="editItem()">
+      <mat-icon matListIcon>create</mat-icon>
+    </button>
 
-    </p>
-  </mat-list>
+    <button mat-icon-button color="warn" (click)="deleteItem()">
+      <mat-icon matListIcon>delete</mat-icon>
+    </button>
+  </p>
+</mat-list-item>
 
-  <mat-list-option *ngIf="userIsHelper">
 
-    <h2 matLine>{{item.title}}</h2>
-    <p matLine>
-      <span>Anzahl: {{item.amount}}</span>
-      <span>maximal Preis: {{item.price_max}}</span>
-      <span>bezahlter Preis: {{item.price_payed}}</span>
+<!--Helper list-->
+<mat-list-option *ngIf="userIsHelper">
 
-    </p>
-  </mat-list-option>
+  <h2 matLine>{{item.title}}</h2>
+  <p matLine>
+    <span>Anzahl: {{item.amount}}</span>
+    <span>maximal Preis: {{item.price_max}}</span>
+    <span>bezahlter Preis: {{item.price_payed}}</span>
+
+  </p>
+</mat-list-option>

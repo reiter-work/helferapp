@@ -34,7 +34,6 @@ export class ShoppingListComponent implements OnInit {
     this.ss.getShoppinglists().subscribe(
       res => {
         this.shoppinglists = res;
-        console.log(this.shoppinglists)
       });
     //
   }
@@ -50,10 +49,16 @@ export class ShoppingListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.shoppinglists.push(result);
-      this.ss.createShoppinglist(result).subscribe();
+      if(!!result.title || !!result.dueDate){
+        result.item = [];
+        this.shoppinglists.push(result);
+        this.ss.createShoppinglist(result).subscribe();
+        this.title ="";
+      }
+
     });
   }
+
 
 }
 

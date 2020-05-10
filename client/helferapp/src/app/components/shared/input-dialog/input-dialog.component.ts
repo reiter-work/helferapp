@@ -39,7 +39,12 @@ export class InputDialogComponent implements OnInit{
   }
 
   save() {
-    this.dialogRef.close(this.form.value);
+    if(this.form.errors){
+      console.log("hua");
+    }
+    else{
+      this.dialogRef.close(this.form.value);
+    }
   }
 
   close() {

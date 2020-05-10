@@ -70,33 +70,6 @@ class ShoppingListController extends Controller
                 'dueDate' => $req->dueDate,
 
             ]);
-
-//            $items = $req->item;
-//
-//            foreach($items as $item){
-//
-//                $newItem = Item::create([
-//                           'shoppinglist_id' => $shoppinglist->id,
-//                           'title' => $item['title'],
-//                        ]);
-//
-//                if(isset($item['price_max'])) $newItem->price_max = $item['price_max'];
-//                if(isset($item['amount'])) $newItem->price_max = $item['amount'];
-//                if(isset($item['price_payed'])) $newItem->price_max = $item['price_payed'];
-//            }
-//
-//            $comments = $req->comment;
-//
-//            foreach($comments as $comment){
-//
-//                Comment::create([
-//                    'user_id' => 2,
-//                    'shoppinglist_id' => $shoppinglist->id,
-//                    'comment' => $comment['comment'],
-//                ]);
-//
-//            }
-
             DB::commit();
 
             return response()->json([$shoppinglist], 201);
@@ -110,6 +83,36 @@ class ShoppingListController extends Controller
             ]);
         }
 
+    }
+
+    public function createItem(Request $req){
+        $req = $this->parseReq($req);
+
+        DB::beginTransaction();
+
+        try {
+            $shoppingitem = Item::create([
+
+                'title' => $req->title,
+                'shoppinglist_id' => $req->shoppinglist_id,
+                'amount' => $req->amount,
+                'price_max' => $req->price_max,
+                'price_payed' => $req->price_payed,
+                'isDone' => false,
+
+            ]);
+            DB::commit();
+
+            return response()->json([$shoppingitem], 201);
+
+        } catch (Error $e) {
+
+            DB::rollBack();
+            return response()->json([
+                'response' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 
     public function updateList(Request $req)

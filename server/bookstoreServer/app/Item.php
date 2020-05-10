@@ -9,9 +9,11 @@ class Item extends Model
 {
     protected $fillable = [
         'title',
+        'amount',
         'shoppinglist_id',
         'price_max',
         'price_payed',
+        'isDone',
     ];
 
     public function shoppinglist() : BelongsTo
