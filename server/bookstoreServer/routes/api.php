@@ -30,12 +30,30 @@ Route::group(['middleware' => ['api', 'cors', 'auth.jwt']], function () {
 
     Route::post('auth/logout', 'Auth\ApiAuthController@logout');
 
-    /**ShoppingListRouts**/
+    /**ShoppingListRouts**********************************/
+
+    //get all Shoppinglists by User
     Route::get('shoppinglist/user', 'ShoppingListController@getShoppinglistByUser');
+
+    //create new Shoppinglist
     Route::post('shoppinglist', 'ShoppingListController@createList');
-    Route::delete('shoppinglist/deleteItem/{id}', 'ShoppingListController@deleteItemById');
-    Route::put('shoppinglist/item', 'ShoppingListController@updateItem');
+
+    //update Shoppinglist
+    Route::put('shoppinglist', 'ShoppingListController@updateList');
+
+    //delete Shoppinglist by ID
+    Route::delete('shoppinglist/{id}', 'ShoppingListController@deleteListById');
+
+    /**Shoppingitem Routes*****************************/
+
+    //create Item
     Route::post('shoppinglist/item', 'ShoppingListController@createItem');
+
+    //update Item
+    Route::put('shoppinglist/item', 'ShoppingListController@updateItem');
+
+    //delete Item by ID
+    Route::delete('shoppinglist/deleteItem/{id}', 'ShoppingListController@deleteItemById');
 
 });
 

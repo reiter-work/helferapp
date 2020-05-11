@@ -1,7 +1,14 @@
 <mat-card *ngIf="shoppinglist">
   <mat-card-header>
-    <mat-card-title>{{ shoppinglist.title }}</mat-card-title>
-    <mat-card-subtitle>{{ shoppinglist.dueDate }}</mat-card-subtitle>
+
+
+
+    <mat-card-title>
+      <button (click)="showShoppinglist()" mat-icon-button color="secondary">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      {{ shoppinglist.title }}</mat-card-title>
+    <mat-card-subtitle>{{ shoppinglist.dueDate | date:'dd.MM.yyyy'}}</mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content *ngIf="userIsHelper">
@@ -18,7 +25,7 @@
 
     <mat-list>
       <mat-list-item>
-        <button mat-button (click)="openDialog()">
+        <button mat-raised-button color="accent" (click)="openDialog()">
           <mat-icon>add</mat-icon>
            hinzufügen
         </button>
@@ -28,8 +35,6 @@
   </mat-card-content>
 
   <mat-card-footer>
-    <button (click)="showShoppinglist()" class="ui red button">
-      Zurück zur Übersicht
-    </button>
+
   </mat-card-footer>
 </mat-card>

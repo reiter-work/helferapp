@@ -3,11 +3,11 @@ import {Shoppinglist, ShoppingItem} from "../../shared/shoppinglist";
 import {ShoppinglistService} from "../../servives/shoppinglist.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {AuthService} from "../../servives/auth.service";
+import {ShoppinglistFactory} from "../../shared/shoppinglist-factory";
+import {ConfirmationDialogComponent} from "../shared/confirmation-dialog/confirmation-dialog.component";
 
 export interface DialogData {
-  title: string;
-  user_id:number;
-  dueDate:Date;
+  shoppinglist: Shoppinglist;
 }
 
 
@@ -18,10 +18,8 @@ export interface DialogData {
 })
 export class ShoppingListComponent implements OnInit {
 
-  shoppinglists: Shoppinglist[];
-  title: string;
-  user_id: number;
-  dueDate: Date;
+  shoppinglists: Shoppinglist[] = [];
+  shoppinglist: Shoppinglist = ShoppinglistFactory.empty();
 
   constructor(private ss: ShoppinglistService, private as: AuthService, public dialog: MatDialog) { }
 
@@ -29,35 +27,80 @@ export class ShoppingListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.user_id = this.as.getCurrentUserId();
+    this.shoppinglist.user_id = this.as.getCurrentUserId();
 
     this.ss.getShoppinglists().subscribe(
       res => {
-        this.shoppinglists = res;
+        for(let shoppinglist of res){
+          this.shoppinglists.push(ShoppinglistFactory.fromObject(shoppinglist));
+        }
       });
     //
   }
 
+  isHelper(){
+    return !!localStorage.getItem("isHelper");
+  }
+
   showDetails(shoppinglist: Shoppinglist){
-    console.log("Details!");
     this.showDetailsEvent.emit(shoppinglist);
+  }
+
+  editList(shoppinglist:Shoppinglist) {
+    const dialogRef = this.dialog.open(AddShoppinglistDialog, {
+      data: {shoppinglist: shoppinglist}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      console.log(result);
+
+      if(!!result.title || !!result.dueDate){
+       this.ss.updateShoppinglist(result).subscribe();
+
+      }
+
+    });
+
+  }
+
+  deleteList(id: string){
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '350px',
+      data: "Möchten Sie den Listeneintrag wirklich löschen?",
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.ss.deleteList(id).subscribe();
+        this.shoppinglists = this.shoppinglists.filter(function(el) { return el.id != id; });
+      }
+    });
+  }
+
+  itemsDone(shoppinglist){
+    let itemsDone = 0;
+    for(let item of shoppinglist.item){
+      item.isDone ? itemsDone++ : "";
+    }
+    return itemsDone;
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddShoppinglistDialog, {
-      data: {title: this.title, user_id: this.user_id, dueDate: this.dueDate}
+      data: {shoppinglist: this.shoppinglist}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if(!!result.title || !!result.dueDate){
-        result.item = [];
         this.shoppinglists.push(result);
         this.ss.createShoppinglist(result).subscribe();
-        this.title ="";
+        this.shoppinglist = ShoppinglistFactory.empty();
       }
 
     });
   }
+
 
 
 }

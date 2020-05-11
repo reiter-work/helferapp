@@ -85,6 +85,54 @@ class ShoppingListController extends Controller
 
     }
 
+    public function updateList(Request $req)
+    {
+        DB::beginTransaction();
+
+        try {
+
+            $req = $this->parseReq($req);
+
+            $shoppinglist = Shoppinglist::find($req->id);
+
+            $shoppinglist->update($req->all());
+
+            $shoppinglist->save();
+            DB::commit();
+
+            return response()->json(Shoppinglist::find($req->id), 201);
+
+
+        } catch (Error $e) {
+
+            DB::rollBack();
+            return response()->json([
+                'response' => 'Updating Shoppinglist failed',
+                'message' => $e->getMessage()
+            ],420);
+        }
+    }
+
+    public function deleteListById($id){
+
+        try{
+
+            $shoppinglist = Shoppinglist::find($id);
+
+            if($shoppinglist){
+                $shoppinglist->delete();
+            }
+
+            return response()->json('deleted', 204);
+
+        }catch (Error $e) {
+            return response()->json([
+                'response' => 'Deleting Item failed',
+                'message' => $e->getMessage()
+            ], 420);
+        }
+    }
+
     public function createItem(Request $req){
         $req = $this->parseReq($req);
 
@@ -115,53 +163,7 @@ class ShoppingListController extends Controller
         }
     }
 
-    public function updateList(Request $req)
-    {
-        DB::beginTransaction();
 
-        try {
-
-            $req = $this->parseReq($req);
-
-            $shoppinglist = Shoppinglist::find($req->id)->with('item', 'comment')->first();
-
-            $shoppinglist->update($req->all());
-
-            //updateItems
-            $items = [];
-
-            //get all current shopping items
-            foreach($shoppinglist->item as $item){
-                array_push($items, Item::find($item->id));
-            }
-
-            //sync with sent items
-
-            foreach ($req->item as $itemToSync){
-
-
-
-            }
-
-            //$shoppinglist->comment = $req->comment;
-//            TODO Comments
-
-
-            $shoppinglist->save();
-            DB::commit();
-
-            return response()->json(Shoppinglist::find($req->id), 201);
-
-
-        } catch (Error $e) {
-
-            DB::rollBack();
-            return response()->json([
-                'response' => 'Updating Shoppinglist failed',
-                'message' => $e->getMessage()
-            ],420);
-        }
-    }
 
     public function deleteItemById($id){
 

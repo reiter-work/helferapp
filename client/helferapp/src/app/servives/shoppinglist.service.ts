@@ -19,8 +19,13 @@ export class ShoppinglistService {
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 
-  updateShoppinglist(id:string){
+  deleteList(id:string){
     return this.http.delete(`${this.api}/shoppinglist/${id}`)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
+  updateShoppinglist(shoppinglist:Shoppinglist){
+    return this.http.put(`${this.api}/shoppinglist`, shoppinglist)
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 

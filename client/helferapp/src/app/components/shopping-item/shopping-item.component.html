@@ -1,20 +1,21 @@
 <!--User List-->
 
 <mat-list-item *ngIf="!userIsHelper">
-
-  <h2 matLine>{{item.title}}</h2>
-  <p matLine>
-    Anzahl: {{item.amount}} ||| max. Preis: € {{item.price_max}}
-  </p>
-  <p matLine>
-    <button mat-icon-button (click)="editItem()">
+  <h2 matLine [class.lineThrough]="item.isDone">{{item.amount}} x {{item.title}}</h2>
+    <button mat-stroked-button color="basic" (click)="editItem()">
       <mat-icon matListIcon>create</mat-icon>
     </button>
+  <button mat-stroked-button color="warn" (click)="deleteItem()">
+    <mat-icon matListIcon>delete</mat-icon>
+  </button>
 
-    <button mat-icon-button color="warn" (click)="deleteItem()">
-      <mat-icon matListIcon>delete</mat-icon>
-    </button>
-  </p>
+
+  <span matLine>
+    max. Preis: € {{item.price_max}}
+  </span>
+  <span matLine *ngIf="item.isDone">
+    bezahlt: € {{item.price_payed}}
+  </span>
 </mat-list-item>
 
 

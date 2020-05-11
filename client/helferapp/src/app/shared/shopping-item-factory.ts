@@ -14,7 +14,7 @@ export class ShoppingitemFactory {
       rawShoppingItem.title,
       rawShoppingItem.price,
       rawShoppingItem.amount,
-      rawShoppingItem.idDone,
+      rawShoppingItem.isDone,
       rawShoppingItem.price_max,
       rawShoppingItem.price_payed,
     );
