@@ -44,6 +44,15 @@ Route::group(['middleware' => ['api', 'cors', 'auth.jwt']], function () {
     //delete Shoppinglist by ID
     Route::delete('shoppinglist/{id}', 'ShoppingListController@deleteListById');
 
+    //get Shoppinglist which are claimed by Helper
+    Route::get('shoppinglist/claimed', 'ShoppingListController@getClaimedLists');
+
+    //get Shoppinglist which are to be claimed
+    Route::get('shoppinglist/toClaim', 'ShoppingListController@getToBeClaimedLists');
+
+    //claimlist
+    Route::put('shoppinglist/claim/{id}', 'ShoppingListController@claimList');
+
     /**Shoppingitem Routes*****************************/
 
     //create Item

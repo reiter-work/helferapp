@@ -9,3 +9,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .lineThrough{
   text-decoration: line-through;
 }
+
+.card-divider{
+  height: 1rem;
+  display: table;
+}

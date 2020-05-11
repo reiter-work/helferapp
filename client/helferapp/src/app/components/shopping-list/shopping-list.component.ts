@@ -19,13 +19,18 @@ export interface DialogData {
 export class ShoppingListComponent implements OnInit {
 
   shoppinglists: Shoppinglist[] = [];
+  claimedLists: Shoppinglist[];
+  tobeClaimedLists: Shoppinglist[];
   shoppinglist: Shoppinglist = ShoppinglistFactory.empty();
+  isHelper:boolean;
 
   constructor(private ss: ShoppinglistService, private as: AuthService, public dialog: MatDialog) { }
 
   @Output() showDetailsEvent = new EventEmitter<Shoppinglist>();
 
   ngOnInit() {
+
+    this.isHelper = this.as.isHelper();
 
     this.shoppinglist.user_id = this.as.getCurrentUserId();
 
@@ -35,11 +40,27 @@ export class ShoppingListComponent implements OnInit {
           this.shoppinglists.push(ShoppinglistFactory.fromObject(shoppinglist));
         }
       });
-    //
-  }
 
-  isHelper(){
-    return !!localStorage.getItem("isHelper");
+    if(this.isHelper){
+
+
+      this.ss.getClaimedLists().subscribe(res => {
+        for(let shoppinglist of res){
+          this.claimedLists.push(ShoppinglistFactory.fromObject(shoppinglist));
+        }
+        console.log(this.claimedLists);
+      });
+
+      this.ss.getListsToClaim().subscribe(res =>{
+        this.tobeClaimedLists = [];
+        for(let shoppinglist of res){
+          this.tobeClaimedLists.push(ShoppinglistFactory.fromObject(shoppinglist));
+        }
+        console.log(this.tobeClaimedLists);
+      })
+
+    }
+
   }
 
   showDetails(shoppinglist: Shoppinglist){

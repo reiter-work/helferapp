@@ -1,5 +1,5 @@
 <!--USER Section-->
-<mat-card *ngIf="!isHelper()">
+<mat-card *ngIf="!isHelper">
   <mat-card-header>
     <mat-card-title>Deine Shoppinglisten</mat-card-title>
   </mat-card-header>
@@ -37,45 +37,67 @@
     </mat-list>
   </mat-card-content>
 </mat-card>
-
 
 
 <!--Helper Section-->
-<mat-card *ngIf="isHelper()">
-  <mat-card-header>
-    <mat-card-title>Deine Shoppinglisten</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>
+<div *ngIf="isHelper">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Shoppinglisten</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
 
-    <mat-action-list>
+      <mat-action-list *ngIf="claimedLists">
 
-      <mat-list-item *ngFor="let shoppinglist of shoppinglists">
+        <mat-list-item *ngFor="let shoppinglist of claimedLists" (click)="showDetails(shoppinglist)">
 
-        <span matLine (click)="showDetails(shoppinglist)">{{shoppinglist.title}}</span>
-        <button mat-icon-button>
-          <mat-icon (click)="editList(shoppinglist)">create</mat-icon>
-        </button>
-        <button mat-icon-button>
-          <mat-icon (click)="deleteList(shoppinglist.id)">delete</mat-icon>
-        </button>
-        <p matLine (click)="showDetails(shoppinglist)">
-          Fällig am: {{shoppinglist.dueDate | date:'dd.MM.yyyy'}}
-        </p>
-        <p matLine (click)="showDetails(shoppinglist)">
-          erledigt: {{itemsDone(shoppinglist)}} / {{shoppinglist.item.length}}
-        </p>
-      </mat-list-item>
-    </mat-action-list>
-    <mat-list>
-      <mat-list-item>
-        <mat-form-field matLine>
-          <mat-label>Neue Einkaufsliste erstellen</mat-label>
-          <input matInput [(ngModel)]="shoppinglist.title">
-        </mat-form-field>
-        <button mat-icon-button (click)="openDialog()">
-          <mat-icon>add</mat-icon>
-        </button>
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
-</mat-card>
+          <span matLine (click)="showDetails(shoppinglist)">{{shoppinglist.title}}</span>
+          <p matLine>
+            Fällig am: {{shoppinglist.dueDate | date:'dd.MM.yyyy'}}
+          </p>
+          <p matLine>
+            erledigt: {{itemsDone(shoppinglist)}} / {{shoppinglist.item.length}}
+          </p>
+        </mat-list-item>
+      </mat-action-list>
+
+      <mat-list *ngIf="!claimedLists">
+
+        <mat-list-item>
+
+          <span>Alles Erledigt! 🎉</span>
+
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="card-divider"></div>
+
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Einkauf übernehmen</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list *ngIf="tobeClaimedLists">
+        <mat-list-item *ngFor="let shoppinglist of tobeClaimedLists">
+          <span matLine>{{shoppinglist.title}}</span>
+          <button mat-stroked-button color="accent">übernehmen</button>
+          <p matLine>
+            Fällig am: {{shoppinglist.dueDate | date:'dd.MM.yyyy'}}
+          </p>
+          <p matLine>
+            Anzahl: {{shoppinglist.item.length}}
+          </p>
+        </mat-list-item>
+      </mat-list>
+
+      <mat-list *ngIf="!tobeClaimedLists">
+        <mat-list-item>
+          <span matLine>Zur Zeit ist niemand auf der Suche nach Hilfe... 🖖🏻</span>
+        </mat-list-item>
+      </mat-list>
+
+    </mat-card-content>
+  </mat-card>
+</div>

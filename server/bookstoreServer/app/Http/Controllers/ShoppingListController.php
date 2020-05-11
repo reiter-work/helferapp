@@ -133,6 +133,55 @@ class ShoppingListController extends Controller
         }
     }
 
+    public function getClaimedLists(Request $req)
+    {
+        try {
+
+            $shoppinglists = Shoppinglist::where('helper_id', $this->getUID($req))->with('item')->get();
+            return $shoppinglists;
+
+        } catch (Error $e) {
+            return response()->json([
+                'response' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function getToBeClaimedLists()
+    {
+        try {
+
+            $shoppinglists = Shoppinglist::where('helper_id', null)->with('item')->get();
+            return $shoppinglists;
+
+        } catch (Error $e) {
+            return response()->json([
+                'response' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+
+    public function claimList($id, Request $req)
+    {
+        try {
+
+            $shoppinglist = Shoppinglist::find($id);
+
+            $shoppinglist->helper_id = $this->getUID($req);
+
+            return $shoppinglist;
+
+        } catch (Error $e) {
+            return response()->json([
+                'response' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
     public function createItem(Request $req){
         $req = $this->parseReq($req);
 
@@ -162,8 +211,6 @@ class ShoppingListController extends Controller
             ]);
         }
     }
-
-
 
     public function deleteItemById($id){
 

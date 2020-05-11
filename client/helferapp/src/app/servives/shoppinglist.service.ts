@@ -29,6 +29,21 @@ export class ShoppinglistService {
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 
+  getClaimedLists(){
+    return this.http.get(`${this.api}/shoppinglist/claimed`)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
+  getListsToClaim(){
+    return this.http.get(`${this.api}/shoppinglist/toClaim`)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
+  claimList(shoppinglist:Shoppinglist){
+    return this.http.put(`${this.api}/shoppinglist/claim/${shoppinglist.id}`, '')
+      .pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
   createShoppinglist(data:any) : Observable<Shoppinglist>{
     return this.http.post(`${this.api}/shoppinglist`, data)
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
