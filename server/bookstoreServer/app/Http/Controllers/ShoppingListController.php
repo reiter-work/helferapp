@@ -172,6 +172,8 @@ class ShoppingListController extends Controller
 
             $shoppinglist->helper_id = $this->getUID($req);
 
+            $shoppinglist->save();
+
             return $shoppinglist;
 
         } catch (Error $e) {

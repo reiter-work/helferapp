@@ -19,8 +19,8 @@ export interface DialogData {
 export class ShoppingListComponent implements OnInit {
 
   shoppinglists: Shoppinglist[] = [];
-  claimedLists: Shoppinglist[];
-  tobeClaimedLists: Shoppinglist[];
+  claimedLists: Shoppinglist[] = [];
+  tobeClaimedLists: Shoppinglist[] = [];
   shoppinglist: Shoppinglist = ShoppinglistFactory.empty();
   isHelper:boolean;
 
@@ -29,38 +29,29 @@ export class ShoppingListComponent implements OnInit {
   @Output() showDetailsEvent = new EventEmitter<Shoppinglist>();
 
   ngOnInit() {
-
     this.isHelper = this.as.isHelper();
-
     this.shoppinglist.user_id = this.as.getCurrentUserId();
 
-    this.ss.getShoppinglists().subscribe(
-      res => {
-        for(let shoppinglist of res){
-          this.shoppinglists.push(ShoppinglistFactory.fromObject(shoppinglist));
-        }
-      });
-
+    if(!this.isHelper){
+      this.ss.getShoppinglists().subscribe(
+        res => {
+          for(let shoppinglist of res){
+            this.shoppinglists.push(ShoppinglistFactory.fromObject(shoppinglist));
+          }
+        });
+    }
     if(this.isHelper){
-
-
       this.ss.getClaimedLists().subscribe(res => {
         for(let shoppinglist of res){
           this.claimedLists.push(ShoppinglistFactory.fromObject(shoppinglist));
         }
-        console.log(this.claimedLists);
       });
-
       this.ss.getListsToClaim().subscribe(res =>{
-        this.tobeClaimedLists = [];
         for(let shoppinglist of res){
           this.tobeClaimedLists.push(ShoppinglistFactory.fromObject(shoppinglist));
         }
-        console.log(this.tobeClaimedLists);
       })
-
     }
-
   }
 
   showDetails(shoppinglist: Shoppinglist){
@@ -73,14 +64,9 @@ export class ShoppingListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
-      console.log(result);
-
       if(!!result.title || !!result.dueDate){
        this.ss.updateShoppinglist(result).subscribe();
-
       }
-
     });
 
   }
@@ -107,6 +93,30 @@ export class ShoppingListComponent implements OnInit {
     return itemsDone;
   }
 
+  claimList(shoppinglist){
+
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '350px',
+      data: "Möchten Sie diesen Einkaufübernehmen?",
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        shoppinglist.helper_id = this.as.getCurrentUserId();
+
+        this.ss.claimList(shoppinglist).subscribe();
+
+        this.claimedLists.push(shoppinglist);
+
+        this.tobeClaimedLists = this.tobeClaimedLists.filter(function(el) { return el.id != shoppinglist.id; });
+      }
+    });
+
+
+
+
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(AddShoppinglistDialog, {
       data: {shoppinglist: this.shoppinglist}
@@ -121,8 +131,6 @@ export class ShoppingListComponent implements OnInit {
 
     });
   }
-
-
 
 }
 

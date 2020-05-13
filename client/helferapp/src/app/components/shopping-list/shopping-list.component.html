@@ -47,7 +47,7 @@
     </mat-card-header>
     <mat-card-content>
 
-      <mat-action-list *ngIf="claimedLists">
+      <mat-action-list>
 
         <mat-list-item *ngFor="let shoppinglist of claimedLists" (click)="showDetails(shoppinglist)">
 
@@ -61,7 +61,7 @@
         </mat-list-item>
       </mat-action-list>
 
-      <mat-list *ngIf="!claimedLists">
+      <mat-list *ngIf="claimedLists.length < 1">
 
         <mat-list-item>
 
@@ -79,10 +79,10 @@
       <mat-card-title>Einkauf übernehmen</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <mat-list *ngIf="tobeClaimedLists">
+      <mat-list >
         <mat-list-item *ngFor="let shoppinglist of tobeClaimedLists">
           <span matLine>{{shoppinglist.title}}</span>
-          <button mat-stroked-button color="accent">übernehmen</button>
+          <button mat-stroked-button color="accent" (click)="claimList(shoppinglist)">übernehmen</button>
           <p matLine>
             Fällig am: {{shoppinglist.dueDate | date:'dd.MM.yyyy'}}
           </p>
@@ -92,7 +92,7 @@
         </mat-list-item>
       </mat-list>
 
-      <mat-list *ngIf="!tobeClaimedLists">
+      <mat-list *ngIf="tobeClaimedLists.length < 1">
         <mat-list-item>
           <span matLine>Zur Zeit ist niemand auf der Suche nach Hilfe... 🖖🏻</span>
         </mat-list-item>
