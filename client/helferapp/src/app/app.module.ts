@@ -27,6 +27,7 @@ import {MatButtonModule} from "@angular/material/button";
 import { InputDialogComponent } from './components/shared/input-dialog/input-dialog.component';
 import {MatGridListModule} from "@angular/material/grid-list";
 import { AddressComponent } from './components/address/address.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { AddressComponent } from './components/address/address.component';
     AddShoppinglistDialog,
     MarkItemAsDoneDialog,
     AddressComponent,
+    CommentComponent,
 
   ],
   imports: [

@@ -39,7 +39,11 @@
 
   <div class="card-divider"></div>
 
-  <bs-address [shoppinglist]="shoppinglist"></bs-address>
+  <bs-address *ngIf="userIsHelper" [shoppinglist]="shoppinglist"></bs-address>
+
+  <div class="card-divider"></div>
+
+  <bs-comment [shoppinglist]="shoppinglist"></bs-comment>
 
 </div>
 

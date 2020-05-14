@@ -6,7 +6,7 @@ import {catchError, retry} from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class CommentsService {
 
   private api = 'http://app.s1710456027.student.kwmhgb.at/api';
 
@@ -14,10 +14,16 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
-  getUser(id) {
-    return this.http.get(`${this.api}/getUser/${id}`)
+  getComments(id) {
+    return this.http.get(`${this.api}/comment/${id}`)
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
+
+  addComment(comment:Comment) {
+    return this.http.post(`${this.api}/comment`, comment)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
 
   private errorHandler(error: Error | any): Observable<any>{
     return throwError(error);

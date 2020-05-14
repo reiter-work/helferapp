@@ -3,6 +3,11 @@
 @import "~assets/css/bootstrap.css"; /*bootstrap-gridsystem*/
 @import "~assets/css/home.css";
 
+:root{
+  --card-gutter: 1rem;
+}
+
+
 
 html, body { height: 100%;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -10,7 +15,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   text-decoration: line-through;
 }
 
+.home{
+  padding-bottom: 3rem;
+}
+
 .card-divider{
-  height: 1rem;
+  height: var(--card-gutter);
   display: table;
 }
+
+mat-card + mat-card{
+  margin-top: var(--card-gutter);
+}
+

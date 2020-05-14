@@ -13,7 +13,7 @@ export class AddressComponent implements OnInit {
 
   @Input() shoppinglist: Shoppinglist;
 
-  user:User;
+  user:User = User.empty();
   constructor(public us:UserService) { }
 
   ngOnInit(): void {

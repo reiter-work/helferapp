@@ -32,6 +32,11 @@ Route::group(['middleware' => ['api', 'cors', 'auth.jwt']], function () {
 
     Route::get('/getUser/{id}', 'UserController@getUser');
 
+    /**CommentRoutes**********************************/
+
+    Route::get('/comment/{id}', 'CommentController@getCommentsForShoppinglist');
+    Route::post('/comment', 'CommentController@newComment');
+
     /**ShoppingListRouts**********************************/
 
     //get all Shoppinglists by User

@@ -1,0 +1,35 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Kommentare
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let comment of this.comments">
+
+        <mat-icon mat-list-icon>chat</mat-icon>
+        <h3 mat-line>{{comment.comment}}</h3>
+        <p matLine>{{comment.created_at | date:'dd.MM.yyyy - HH:mm'}} | <strong>{{comment.username}}</strong></p>
+      </mat-list-item>
+
+      <mat-list-item>
+        <mat-form-field matLine>
+          <mat-label>Kommentar hinzufügen</mat-label>
+          <input type="text" matInput [(ngModel)]="newComment.comment">
+        </mat-form-field>
+        <button mat-icon-button (click)="addComment()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-list-item>
+
+    </mat-list>
+
+  </mat-card-content>
+
+
+
+
+
+</mat-card>
