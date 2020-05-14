@@ -5,7 +5,7 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AddShoppinglistDialog, ShoppingListComponent} from './components/shopping-list/shopping-list.component';
-import {ShoppingItemComponent} from './components/shopping-item/shopping-item.component';
+import {MarkItemAsDoneDialog, ShoppingItemComponent} from './components/shopping-item/shopping-item.component';
 import {MatListModule} from "@angular/material/list";
 import {HomeComponent} from './components/home/home.component';
 import {GreetingComponent} from './components/greeting/greeting.component';
@@ -25,6 +25,8 @@ import {ConfirmationDialogComponent} from './components/shared/confirmation-dial
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import { InputDialogComponent } from './components/shared/input-dialog/input-dialog.component';
+import {MatGridListModule} from "@angular/material/grid-list";
+import { AddressComponent } from './components/address/address.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { InputDialogComponent } from './components/shared/input-dialog/input-dia
     ConfirmationDialogComponent,
     InputDialogComponent,
     AddShoppinglistDialog,
+    MarkItemAsDoneDialog,
+    AddressComponent,
 
   ],
   imports: [
@@ -54,6 +58,7 @@ import { InputDialogComponent } from './components/shared/input-dialog/input-dia
     MatDialogModule,
     MatButtonModule,
     FormsModule,
+    MatGridListModule,
   ],
   entryComponents: [
     ConfirmationDialogComponent,

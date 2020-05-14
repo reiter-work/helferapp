@@ -1,40 +1,46 @@
-<mat-card *ngIf="shoppinglist">
-  <mat-card-header>
-
-
-
-    <mat-card-title>
-      <button (click)="showShoppinglist()" mat-icon-button color="secondary">
-        <mat-icon>arrow_back</mat-icon>
-      </button>
-      {{ shoppinglist.title }}</mat-card-title>
-    <mat-card-subtitle>{{ shoppinglist.dueDate | date:'dd.MM.yyyy'}}</mat-card-subtitle>
-  </mat-card-header>
-
-  <mat-card-content *ngIf="userIsHelper">
-    <mat-selection-list *ngFor="let item of shoppinglist.item">
-      <bs-shopping-item [item]="item"></bs-shopping-item>
-    </mat-selection-list>
-  </mat-card-content>
-
-  <mat-card-content *ngIf="!userIsHelper">
-    <mat-list *ngFor="let item of shoppinglist.item">
-      <bs-shopping-item [item]="item" (deleteItemEvent)="deleteItem($event)"></bs-shopping-item>
-      <mat-divider></mat-divider>
-    </mat-list>
-
-    <mat-list>
-      <mat-list-item>
-        <button mat-raised-button color="accent" (click)="openDialog()">
-          <mat-icon>add</mat-icon>
-           hinzufügen
+<div>
+  <mat-card *ngIf="shoppinglist">
+    <mat-card-header>
+      <mat-card-title>
+        <button (click)="showShoppinglist()" mat-icon-button color="primary">
+          <mat-icon>arrow_back</mat-icon>
         </button>
-      </mat-list-item>
-    </mat-list>
+        {{ shoppinglist.title }}</mat-card-title>
+      <mat-card-subtitle>{{"zu erledigen bis: "}}{{shoppinglist.dueDate | date:'dd.MM.yyyy'}}</mat-card-subtitle>
+      <mat-card-subtitle>{{ 'Gesamtsumme: € ' + totalAmount(shoppinglist)}}</mat-card-subtitle>
+    </mat-card-header>
 
-  </mat-card-content>
+    <mat-card-content *ngIf="userIsHelper">
+      <mat-selection-list *ngFor="let item of shoppinglist.item">
+        <bs-shopping-item [item]="item"></bs-shopping-item>
+      </mat-selection-list>
 
-  <mat-card-footer>
+    </mat-card-content>
 
-  </mat-card-footer>
-</mat-card>
+    <mat-card-content *ngIf="!userIsHelper">
+      <mat-list *ngFor="let item of shoppinglist.item">
+        <bs-shopping-item [item]="item" (deleteItemEvent)="deleteItem($event)"></bs-shopping-item>
+        <mat-divider></mat-divider>
+      </mat-list>
+
+      <mat-list>
+        <mat-list-item>
+          <button mat-raised-button color="accent" (click)="openDialog()">
+            <mat-icon>add</mat-icon>
+            hinzufügen
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+
+
+
+  </mat-card>
+
+  <div class="card-divider"></div>
+
+  <bs-address [shoppinglist]="shoppinglist"></bs-address>
+
+</div>
+
+

@@ -59,6 +59,11 @@ export class ShoppinglistService {
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 
+  toggleListitem(id:string){
+    return this.http.put(`${this.api}/shoppinglist/item/${id}`, {})
+      .pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
   addItem(item:ShoppingItem){
     return this.http.post(`${this.api}/shoppinglist/item`, item)
       .pipe(retry(3)).pipe(catchError(this.errorHandler));

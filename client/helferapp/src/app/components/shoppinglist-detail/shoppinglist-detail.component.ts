@@ -38,6 +38,16 @@ export class ShoppinglistDetailComponent implements OnInit {
     this.shoppinglist.item = this.shoppinglist.item.filter(function(el) { return el.id != item.id; });
   }
 
+  totalAmount(shoppinglist:Shoppinglist){
+
+    let total = 0;
+    for(let item of shoppinglist.item){
+      if(item.price_payed) total += item.price_payed;
+    }
+    return total;
+
+  }
+
   openDialog(): void {
     const dialogRef = this.dialog.open(InputDialogComponent, {
       data: {item: this.shoppingItem}

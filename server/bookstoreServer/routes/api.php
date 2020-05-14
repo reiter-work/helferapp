@@ -30,6 +30,8 @@ Route::group(['middleware' => ['api', 'cors', 'auth.jwt']], function () {
 
     Route::post('auth/logout', 'Auth\ApiAuthController@logout');
 
+    Route::get('/getUser/{id}', 'UserController@getUser');
+
     /**ShoppingListRouts**********************************/
 
     //get all Shoppinglists by User
@@ -60,6 +62,9 @@ Route::group(['middleware' => ['api', 'cors', 'auth.jwt']], function () {
 
     //update Item
     Route::put('shoppinglist/item', 'ShoppingListController@updateItem');
+
+    //update Item
+    Route::put('shoppinglist/item/{id}', 'ShoppingListController@toggleItem');
 
     //delete Item by ID
     Route::delete('shoppinglist/deleteItem/{id}', 'ShoppingListController@deleteItemById');

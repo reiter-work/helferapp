@@ -22,6 +22,10 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->boolean('isHelper');
+            $table->string('street');
+            $table->integer('streetnumber');
+            $table->integer('zipcode');
+            $table->string('city');
         });
     }
 

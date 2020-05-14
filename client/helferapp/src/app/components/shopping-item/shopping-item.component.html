@@ -20,13 +20,20 @@
 
 
 <!--Helper list-->
-<mat-list-option *ngIf="userIsHelper">
+<mat-list *ngIf="userIsHelper">
+  <mat-list-item>
+    <h2 matLine [class.lineThrough]="item.isDone">{{item.amount}} x {{item.title}}</h2>
 
-  <h2 matLine>{{item.title}}</h2>
-  <p matLine>
-    <span>Anzahl: {{item.amount}}</span>
-    <span>maximal Preis: {{item.price_max}}</span>
-    <span>bezahlter Preis: {{item.price_payed}}</span>
+    <button mat-stroked-button color="basic" (click)="toggleIsDone(item)">
+      <mat-icon matListIcon>{{item.isDone ? 'clear' : 'done'}}</mat-icon>
+    </button>
 
-  </p>
-</mat-list-option>
+    <span matLine>
+    max. Preis: € {{item.price_max}}
+  </span>
+    <span matLine *ngIf="item.price_payed">
+    bezahlt: € {{item.price_payed}}
+  </span>
+  </mat-list-item>
+
+</mat-list>

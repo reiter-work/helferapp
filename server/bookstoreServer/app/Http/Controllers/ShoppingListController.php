@@ -247,7 +247,7 @@ class ShoppingListController extends Controller
             $item->save();
             DB::commit();
 
-            return response()->json($req->id, 202);
+            return response()->json($item, 202);
 
 
         } catch (Error $e){
@@ -261,6 +261,13 @@ class ShoppingListController extends Controller
 
         }
 
+    }
+
+    public function toggleItem($id){
+        $item = Item::find($id);
+        $item->isDone = !$item->isDone;
+        $item->save();
+        return $item;
     }
 
     private function getUID($req) : int{

@@ -10,7 +10,6 @@ export interface DialogData {
   shoppinglist: Shoppinglist;
 }
 
-
 @Component({
   selector: 'bs-shopping-list',
   templateUrl: './shopping-list.component.html',
