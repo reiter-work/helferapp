@@ -24,7 +24,7 @@ class ShoppingListTableSeeder extends Seeder
                 'dueDate' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+2 months'),
                 'created_at' => $faker->dateTime('now'),
                 'updated_at' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+2 months'),
-                'user_id' => rand(1,2),
+                'user_id' => 2,
                 'helper_id' => null,
             ]);
         }

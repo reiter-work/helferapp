@@ -5,13 +5,15 @@
     </mat-card-title>
   </mat-card-header>
 
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-<!--  TODO Gmaps implementation-->
-
   <mat-card-content>
     <mat-list>
       <mat-list-item>
-        <p>{{renderAdress()}}</p>
+        <h4 matLine>{{this.user.name}}</h4>
+
+        <a mat-mini-fab target="_blank" href="{{getGMapsLink()}}"><mat-icon>map</mat-icon></a>
+
+        <p matLine>{{this.user.street}} {{this.user.streetnumber}}</p>
+        <p matLine>{{this.user.zipcode}} {{this.user.city}}</p>
       </mat-list-item>
     </mat-list>
 
