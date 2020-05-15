@@ -6,13 +6,12 @@
           <h1 class="mat-h1">Helferapp</h1>
       </span>
 
-      <span class="mat-toolbar-filler"></span>
+    <span class="mat-toolbar-filler"></span>
 
-      <span *ngIf="isLoggedIn()">
-          <span class="mat-icon-button" (click)="logout()">Logout
-            <mat-icon>logout</mat-icon>
-          </span>
-      </span>
+    <button mat-button  *ngIf="isLoggedIn()" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+          Logout
+      </button>
 
   </mat-toolbar>
 
@@ -29,17 +28,14 @@
         <bs-shopping-list *ngIf="listOn" (showDetailsEvent)="showDetail($event)"></bs-shopping-list>
 
 
-
-        <bs-shoppinglist-detail *ngIf="detailOn" [shoppinglist]="shoppinglist" (showListEvent)="showList()"></bs-shoppinglist-detail>
+        <bs-shoppinglist-detail *ngIf="detailOn" [shoppinglist]="shoppinglist"
+                                (showListEvent)="showList()"></bs-shoppinglist-detail>
       </div>
 
 
     </div>
 
   </div>
-
-
-
 
 
 </div>
