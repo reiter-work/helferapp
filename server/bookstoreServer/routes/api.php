@@ -68,7 +68,7 @@ Route::group(['middleware' => ['api', 'cors', 'auth.jwt']], function () {
     //update Item
     Route::put('shoppinglist/item', 'ShoppingListController@updateItem');
 
-    //update Item
+    //toggle Item
     Route::put('shoppinglist/item/{id}', 'ShoppingListController@toggleItem');
 
     //delete Item by ID
