@@ -29,7 +29,7 @@ export class CommentComponent implements OnInit {
       this.comments = [];
       for(let comment of res){
         let newComment = Comment.fromObject(comment);
-       this.us.getUser(comment.user_id).subscribe(res => {
+       this.us.getUser(newComment.user_id).subscribe(res => {
           newComment.username = res.name;
         });
         this.comments.push(newComment);
@@ -43,7 +43,10 @@ export class CommentComponent implements OnInit {
   addComment(){
 
     this.newComment.user_id = this.as.getCurrentUserId();
-    this.newComment.shoppinglist_id = this.shoppinglist.id;
+    this.newComment.shoppinglist_id = +this.shoppinglist.id;
+
+    console.log(this.newComment);
+
     this.cs.addComment(this.newComment).subscribe(res => {
       let comment = Comment.fromObject(res);
       comment.username = localStorage.getItem("username");

@@ -3,14 +3,17 @@
   <mat-form-field>
     <input matInput required
            placeholder="Name"
-           formControlName="title">
+           formControlName="title"
+    >
+
   </mat-form-field>
 
   <mat-form-field>
     <input matInput required
            type="number"
            placeholder="Anzahl, Stück, Pkg."
-           formControlName="amount">
+           formControlName="amount"
+           >
   </mat-form-field>
 
   <mat-form-field>
@@ -18,6 +21,7 @@
            type="number"
            placeholder="maximaler Preis"
            formControlName="price_max"
+
             >
   </mat-form-field>
 
@@ -25,5 +29,5 @@
 
 <mat-dialog-actions>
   <button class="mat-raised-button" (click)="close()">Abbrechen</button>
-  <button class="mat-raised-button mat-primary" (click)="save()">Speichern</button>
+  <button class="mat-raised-button mat-primary" [disabled]="!form.value.title || !form.value.amount || !form.value.price_max" (click)="save()">Speichern</button>
 </mat-dialog-actions>

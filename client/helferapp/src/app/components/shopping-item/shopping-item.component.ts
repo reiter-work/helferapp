@@ -58,7 +58,8 @@ export class ShoppingItemComponent implements OnInit {
       dialogRef.afterClosed().subscribe(
         data => {
           if(data){
-            this.item.price_payed = data.price_payed;
+            console.log(data);
+            this.item.price_payed = +data.price_payed;
             this.item.isDone = true;
             this.ss.updateItem(this.item).subscribe();
           }

@@ -55,9 +55,6 @@ export class ShoppinglistDetailComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(!!result.title || !!result.amount || !!result.price_max){
-
-        console.log(result.amount);
-
         result.shoppinglist_id = this.shoppinglist.id;
         this.shoppinglist.item.push(result);
         this.ss.addItem(result).subscribe();
