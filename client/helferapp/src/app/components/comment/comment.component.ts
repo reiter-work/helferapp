@@ -20,17 +20,18 @@ export class CommentComponent implements OnInit {
 
   comments:Comment[];
   newComment:Comment = Comment.empty();
-  UserList = {user: User.empty(), helper: User.empty()};
+  user:User = User.empty();
+  helper:User = User.empty();
 
   constructor(public cs:CommentsService, public as:AuthService, public us:UserService) { }
 
   ngOnInit(): void {
 
     this.us.getUser(this.shoppinglist.user_id).subscribe(res => {
-      this.UserList.user = res;
+      this.user = res;
     });
     this.us.getUser(this.shoppinglist.helper_id).subscribe(res => {
-      this.UserList.helper = res;
+      this.helper = res;
     });
 
 
@@ -38,11 +39,11 @@ export class CommentComponent implements OnInit {
       this.comments = [];
       for(let comment of res){
         let newComment = Comment.fromObject(comment);
-        if(newComment.user_id === this.UserList.user.id){
-          newComment.username = this.UserList.user.name
+        if(newComment.user_id === this.user.id){
+          newComment.username = this.user.name
         }
         else{
-          newComment.username = this.UserList.helper.name
+          newComment.username = this.helper.name
         }
         this.comments.push(newComment);
       }
@@ -55,9 +56,6 @@ export class CommentComponent implements OnInit {
 
     this.newComment.user_id = this.as.getCurrentUserId();
     this.newComment.shoppinglist_id = +this.shoppinglist.id;
-
-    console.log(this.newComment);
-
     this.cs.addComment(this.newComment).subscribe(res => {
       let comment = Comment.fromObject(res);
       comment.username = localStorage.getItem("username");

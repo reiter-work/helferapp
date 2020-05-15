@@ -52,7 +52,6 @@ export class AuthService {
     localStorage.removeItem("userId");
     localStorage.removeItem("isHelper");
     localStorage.removeItem("username");
-    console.log("logged out");
   }
 
   public isLoggedIn() {

@@ -31,8 +31,6 @@ export class JwtInterceptorService implements HttpInterceptor {
             // redirect to the login route
             // or show a modal
             // http://jasonwatmore.com/post/2016/09/29/angular-2-user-registration-and-login-example-tutorial​
-            console.log("error");
-            alert("Invalid login");
             this.as.logout();
           }
 

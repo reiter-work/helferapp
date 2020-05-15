@@ -34,6 +34,18 @@ class UserTableSeeder extends Seeder
             'city' => 'Linz',
 
         ]);
+
+        DB::table('users')->insert([
+            'name' => 'Johannes Reiter',
+            'email' => 'johannes@r.at',
+            'password' => bcrypt('123'),
+            'isHelper' => false,
+            'street' => 'Webergasse',
+            'streetnumber' => 9,
+            'zipcode' => 4020,
+            'city' => 'Linz',
+
+        ]);
     }
 
 
