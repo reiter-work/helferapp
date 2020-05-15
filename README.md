@@ -20,7 +20,7 @@
 
 ## Database-Schema
 
-[DB-Shema]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Initial DB Schema"
+![DB-Schema](https://screentocloud.com/images/85746282-63ee-48f6-98bb-9033fbf6d48d.png "Initial DB-Schema")
 
 ## API-Methods:
 
