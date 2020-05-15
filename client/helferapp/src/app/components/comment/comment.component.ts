@@ -20,21 +20,32 @@ export class CommentComponent implements OnInit {
 
   comments:Comment[];
   newComment:Comment = Comment.empty();
-  user:User = User.empty();
+  UserList = {user: User.empty(), helper: User.empty()};
+
   constructor(public cs:CommentsService, public as:AuthService, public us:UserService) { }
 
   ngOnInit(): void {
+
+    this.us.getUser(this.shoppinglist.user_id).subscribe(res => {
+      this.UserList.user = res;
+    });
+    this.us.getUser(this.shoppinglist.helper_id).subscribe(res => {
+      this.UserList.helper = res;
+    });
+
 
     this.cs.getComments(this.shoppinglist.id).subscribe(res => {
       this.comments = [];
       for(let comment of res){
         let newComment = Comment.fromObject(comment);
-       this.us.getUser(newComment.user_id).subscribe(res => {
-          newComment.username = res.name;
-        });
+        if(newComment.user_id === this.UserList.user.id){
+          newComment.username = this.UserList.user.name
+        }
+        else{
+          newComment.username = this.UserList.helper.name
+        }
         this.comments.push(newComment);
       }
-
 
     })
 
