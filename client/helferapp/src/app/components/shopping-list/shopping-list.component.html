@@ -82,7 +82,9 @@
       <mat-list >
         <mat-list-item *ngFor="let shoppinglist of tobeClaimedLists">
           <span matLine>{{shoppinglist.title}}</span>
-          <button mat-stroked-button color="accent" (click)="claimList(shoppinglist)">übernehmen</button>
+          <button mat-fab color="accent" (click)="claimList(shoppinglist)">
+            <mat-icon>add_shopping_cart</mat-icon>
+            </button>
           <p matLine>
             Fällig am: {{shoppinglist.dueDate | date:'dd.MM.yyyy'}}
           </p>
