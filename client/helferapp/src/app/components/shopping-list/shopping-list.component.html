@@ -10,10 +10,10 @@
       <mat-list-item *ngFor="let shoppinglist of shoppinglists">
 
         <span matLine (click)="showDetails(shoppinglist)">{{shoppinglist.title}}</span>
-        <button mat-icon-button>
+        <button mat-mini-fab color="primary">
           <mat-icon (click)="editList(shoppinglist)">create</mat-icon>
         </button>
-        <button mat-icon-button>
+        <button mat-icon-button color="warn">
           <mat-icon (click)="deleteList(shoppinglist.id)">delete</mat-icon>
         </button>
         <p matLine (click)="showDetails(shoppinglist)">
@@ -30,7 +30,7 @@
           <mat-label>Neue Einkaufsliste erstellen</mat-label>
           <input matInput [(ngModel)]="shoppinglist.title">
         </mat-form-field>
-        <button mat-icon-button (click)="openDialog()">
+        <button mat-mini-fab color="primary" (click)="openDialog()">
           <mat-icon>add</mat-icon>
         </button>
       </mat-list-item>
@@ -82,7 +82,7 @@
       <mat-list >
         <mat-list-item *ngFor="let shoppinglist of tobeClaimedLists">
           <span matLine>{{shoppinglist.title}}</span>
-          <button mat-fab color="accent" (click)="claimList(shoppinglist)">
+          <button mat-fab color="primary" (click)="claimList(shoppinglist)">
             <mat-icon>add_shopping_cart</mat-icon>
             </button>
           <p matLine>
