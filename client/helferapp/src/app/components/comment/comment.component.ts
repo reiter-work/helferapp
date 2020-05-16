@@ -28,10 +28,10 @@ export class CommentComponent implements OnInit {
   ngOnInit(): void {
 
     this.us.getUser(this.shoppinglist.user_id).subscribe(res => {
-      this.user = res;
+      this.user = User.fromObject(res);
     });
     this.us.getUser(this.shoppinglist.helper_id).subscribe(res => {
-      this.helper = res;
+      this.helper = User.fromObject(res);
     });
 
 

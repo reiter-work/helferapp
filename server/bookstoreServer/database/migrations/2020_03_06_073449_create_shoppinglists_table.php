@@ -20,7 +20,7 @@ class CreateShoppinglistsTable extends Migration
         $table->string('title');
         $table->date('dueDate');
         $table->timestamps();
-        //TODO: bills
+        
         $table->foreign('user_id')
             ->references('id')
             ->on('users')->onDelete('cascade');
