@@ -29,26 +29,27 @@ export class CommentComponent implements OnInit {
 
     this.us.getUser(this.shoppinglist.user_id).subscribe(res => {
       this.user = User.fromObject(res);
+      this.us.getUser(this.shoppinglist.helper_id).subscribe(res => {
+        this.helper = User.fromObject(res);
+
+        this.cs.getComments(this.shoppinglist.id).subscribe(res => {
+          this.comments = [];
+          for(let comment of res){
+            let newComment = Comment.fromObject(comment);
+            if(newComment.user_id === this.user.id){
+              newComment.username = this.user.name
+            }
+            else{
+              newComment.username = this.helper.name
+            }
+            this.comments.push(newComment);
+          }
+
+        })
+      });
     });
-    this.us.getUser(this.shoppinglist.helper_id).subscribe(res => {
-      this.helper = User.fromObject(res);
-    });
 
 
-    this.cs.getComments(this.shoppinglist.id).subscribe(res => {
-      this.comments = [];
-      for(let comment of res){
-        let newComment = Comment.fromObject(comment);
-        if(newComment.user_id === this.user.id){
-          newComment.username = this.user.name
-        }
-        else{
-          newComment.username = this.helper.name
-        }
-        this.comments.push(newComment);
-      }
-
-    })
 
   }
 
