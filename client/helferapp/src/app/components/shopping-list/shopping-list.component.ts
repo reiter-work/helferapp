@@ -86,8 +86,10 @@ export class ShoppingListComponent implements OnInit {
 
   itemsDone(shoppinglist){
     let itemsDone = 0;
-    for(let item of shoppinglist.item){
-      item.isDone ? itemsDone++ : "";
+    if(shoppinglist.item){
+      for(let item of shoppinglist.item){
+        item.isDone ? itemsDone++ : "";
+      }
     }
     return itemsDone;
   }
@@ -102,11 +104,8 @@ export class ShoppingListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         shoppinglist.helper_id = this.as.getCurrentUserId();
-
         this.ss.claimList(shoppinglist).subscribe();
-
         this.claimedLists.push(shoppinglist);
-
         this.tobeClaimedLists = this.tobeClaimedLists.filter(function(el) { return el.id != shoppinglist.id; });
       }
     });
@@ -123,11 +122,14 @@ export class ShoppingListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(!!result.title || !!result.dueDate){
-        this.shoppinglists.push(result);
-        this.ss.createShoppinglist(result).subscribe();
-        this.shoppinglist = ShoppinglistFactory.empty();
+        //crazy Dateobject shit. WTF???
+        this.ss.createShoppinglist(result).subscribe(res => {
+          let list = ShoppinglistFactory.fromObject(res);
+          list.dueDate = result.dueDate;
+          this.shoppinglists.push(list);
+          this.shoppinglist = ShoppinglistFactory.empty();
+        });
       }
-
     });
   }
 

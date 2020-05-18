@@ -72,7 +72,8 @@ class ShoppingListController extends Controller
             ]);
             DB::commit();
 
-            return response()->json([$shoppinglist], 201);
+
+            return response()->json($shoppinglist, 201);
 
         } catch (Error $e) {
 
